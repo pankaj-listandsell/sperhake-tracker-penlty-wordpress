@@ -1,0 +1,46 @@
+/* Sperhake Vehicle Tracker — admin styles */
+
+.sperhake-cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 16px;
+	margin: 20px 0 28px;
+}
+.sperhake-card {
+	background: #fff;
+	border: 1px solid #dcdfe4;
+	border-left: 4px solid #1d6fe0;
+	border-radius: 8px;
+	padding: 18px 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+.sperhake-card.is-alert { border-left-color: #dc2626; }
+.sperhake-card__label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: #6b7280; }
+.sperhake-card__value { font-size: 28px; font-weight: 700; color: #0f2a4a; }
+
+.sperhake-filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 14px 0; }
+.sperhake-count { color: #6b7280; }
+
+.sperhake-badge {
+	display: inline-block;
+	padding: 2px 9px;
+	border-radius: 999px;
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	background: #e5e7eb;
+	color: #374151;
+}
+.sperhake-badge--paid,
+.sperhake-badge--synced { background: #dcfce7; color: #166534; }
+.sperhake-badge--pending { background: #fef9c3; color: #854d0e; }
+.sperhake-badge--failed,
+.sperhake-badge--abandoned,
+.sperhake-badge--error { background: #fee2e2; color: #991b1b; }
+.sperhake-badge--warning { background: #ffedd5; color: #9a3412; }
+.sperhake-badge--info,
+.sperhake-badge--debug { background: #e0e7ff; color: #3730a3; }
+
+.sperhake-settings .form-table th { width: 240px; }
