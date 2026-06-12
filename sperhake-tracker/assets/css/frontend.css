@@ -3,63 +3,102 @@
 .sperhake-widget {
 	--sperhake-primary: #0f2a4a;
 	--sperhake-accent: #1d6fe0;
-	--sperhake-radius: 14px;
+	--sperhake-radius: 18px;
+	position: relative;
 	max-width: 720px;
-	margin: 0 auto;
-	padding: 28px;
+	margin: 48px auto;
+	padding: 40px;
 	background: #fff;
 	border: 1px solid #e6e9ee;
 	border-radius: var(--sperhake-radius);
-	box-shadow: 0 8px 30px rgba(15, 42, 74, 0.06);
+	box-shadow: 0 20px 50px -12px rgba(15, 42, 74, 0.18), 0 4px 12px rgba(15, 42, 74, 0.04);
 	box-sizing: border-box;
 	font-family: inherit;
 	color: #1f2937;
+	overflow: hidden;
+}
+
+/* Accent bar across the top of the card */
+.sperhake-widget::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 5px;
+	background: linear-gradient(90deg, var(--sperhake-accent) 0%, #155bbd 100%);
 }
 
 .sperhake-widget *,
 .sperhake-widget *::before,
 .sperhake-widget *::after { box-sizing: border-box; }
 
-.sperhake-widget__title { margin: 0 0 6px; font-size: 1.6rem; color: var(--sperhake-primary); }
-.sperhake-widget__subtitle { margin: 0 0 22px; color: #6b7280; font-size: 0.95rem; }
+.sperhake-widget__header { margin-bottom: 28px; }
+.sperhake-widget__title {
+	margin: 0 0 8px;
+	font-size: 1.9rem;
+	font-weight: 800;
+	line-height: 1.2;
+	color: var(--sperhake-primary);
+	letter-spacing: -0.01em;
+}
+.sperhake-widget__subtitle { margin: 0; color: #6b7280; font-size: 1rem; line-height: 1.55; max-width: 46ch; }
 
-.sperhake-search__label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem; }
-.sperhake-search__row { display: flex; gap: 10px; flex-wrap: wrap; }
+.sperhake-search__label {
+	display: block;
+	font-weight: 700;
+	margin-bottom: 10px;
+	font-size: 0.8rem;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var(--sperhake-primary);
+}
+.sperhake-search__row { display: flex; gap: 12px; flex-wrap: wrap; }
 
 .sperhake-search__input {
 	flex: 1 1 220px;
-	padding: 14px 16px;
-	font-size: 1.05rem;
-	letter-spacing: 0.06em;
+	padding: 16px 18px;
+	font-size: 1.1rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
 	text-transform: uppercase;
-	border: 2px solid #d7dde6;
-	border-radius: 10px;
-	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+	color: var(--sperhake-primary);
+	background: #f8fafc;
+	border: 2px solid #e2e8f0;
+	border-radius: 12px;
+	transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
+.sperhake-search__input::placeholder { color: #aab2c0; font-weight: 500; letter-spacing: 0.06em; }
 .sperhake-search__input:focus {
 	outline: none;
+	background: #fff;
 	border-color: var(--sperhake-accent);
-	box-shadow: 0 0 0 3px rgba(29, 111, 224, 0.15);
+	box-shadow: 0 0 0 4px rgba(29, 111, 224, 0.12);
 }
 
 .sperhake-btn {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	padding: 14px 22px;
+	padding: 16px 26px;
 	font-size: 1rem;
-	font-weight: 600;
+	font-weight: 700;
 	border: 0;
-	border-radius: 10px;
+	border-radius: 12px;
 	cursor: pointer;
-	transition: transform 0.08s ease, background 0.15s ease, opacity 0.15s ease;
+	transition: transform 0.08s ease, background 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
 	text-decoration: none;
+	white-space: nowrap;
 }
 .sperhake-btn:active { transform: translateY(1px); }
 .sperhake-btn:disabled { opacity: 0.6; cursor: progress; }
 
-.sperhake-btn--primary { background: var(--sperhake-accent, #1d6fe0); color: #fff; }
-.sperhake-btn--primary:hover { background: #155bbd; }
+.sperhake-btn--primary {
+	background: var(--sperhake-accent, #1d6fe0);
+	color: #fff;
+	box-shadow: 0 6px 16px -4px rgba(29, 111, 224, 0.5);
+}
+.sperhake-btn--primary:hover { background: #155bbd; box-shadow: 0 8px 20px -4px rgba(29, 111, 224, 0.55); }
 .sperhake-btn--pay { background: #16a34a; color: #fff; width: 100%; font-size: 1.1rem; padding: 16px; }
 .sperhake-btn--pay:hover { background: #128a3e; }
 
@@ -266,6 +305,8 @@
 }
 
 @media (max-width: 560px) {
+	.sperhake-widget { margin: 24px auto; padding: 26px 20px; }
+	.sperhake-widget__title { font-size: 1.55rem; }
 	.sperhake-vehicle__grid { grid-template-columns: 1fr; }
 	.sperhake-search__row { flex-direction: column; }
 	.sperhake-btn--primary { width: 100%; }
