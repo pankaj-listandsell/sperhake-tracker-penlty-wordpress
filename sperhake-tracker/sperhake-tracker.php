@@ -3,7 +3,7 @@
  * Plugin Name:       Sperhake Vehicle Tracking & Penalty Payment
  * Plugin URI:        https://abschleppdienst-sperhake.de/
  * Description:        Vehicle lookup by license plate, towing status, and online penalty payment via Stripe for Abschleppdienst Sperhake.
- * Version:           1.2.0
+ * Version:           1.3.0
  * Requires at least: 6.4
  * Requires PHP:      8.2
  * Author:            Abschleppdienst Sperhake
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Plugin constants
  * --------------------------------------------------------------------------
  */
-define( 'SPERHAKE_TRACKER_VERSION', '1.2.0' );
+define( 'SPERHAKE_TRACKER_VERSION', '1.3.0' );
 define( 'SPERHAKE_TRACKER_FILE', __FILE__ );
 define( 'SPERHAKE_TRACKER_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SPERHAKE_TRACKER_URL', plugin_dir_url( __FILE__ ) );

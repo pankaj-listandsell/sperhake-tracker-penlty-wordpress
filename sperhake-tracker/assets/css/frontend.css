@@ -58,7 +58,7 @@
 .sperhake-btn:active { transform: translateY(1px); }
 .sperhake-btn:disabled { opacity: 0.6; cursor: progress; }
 
-.sperhake-btn--primary { background: var(--sperhake-accent); color: #fff; }
+.sperhake-btn--primary { background: var(--sperhake-accent, #1d6fe0); color: #fff; }
 .sperhake-btn--primary:hover { background: #155bbd; }
 .sperhake-btn--pay { background: #16a34a; color: #fff; width: 100%; font-size: 1.1rem; padding: 16px; }
 .sperhake-btn--pay:hover { background: #128a3e; }
@@ -149,6 +149,35 @@
 	color: var(--sperhake-primary, #0f2a4a);
 }
 
+.sperhake-route {
+	display: flex;
+	align-items: stretch;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+.sperhake-route__leg {
+	flex: 1 1 200px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+.sperhake-route__label {
+	font-size: 0.72rem;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: #6b7280;
+}
+.sperhake-route__address {
+	font-size: 1.02rem;
+	font-weight: 600;
+	color: var(--sperhake-primary, #0f2a4a);
+}
+.sperhake-route__arrow {
+	align-self: center;
+	font-size: 1.3rem;
+	color: var(--sperhake-accent, #1d6fe0);
+}
+
 .sperhake-destination__actions {
 	display: flex;
 	gap: 10px;
@@ -203,6 +232,10 @@
 
 /* Success panel */
 .sperhake-success {
+	/* Theme tokens are scoped to .sperhake-widget; the success panel renders as
+	   its own sibling, so redeclare them here to keep button colours visible. */
+	--sperhake-primary: #0f2a4a;
+	--sperhake-accent: #1d6fe0;
 	max-width: 560px;
 	margin: 0 auto 24px;
 	padding: 32px;
@@ -222,6 +255,15 @@
 .sperhake-success__title { margin: 0 0 18px; color: var(--sperhake-primary, #0f2a4a); }
 .sperhake-success__details { text-align: left; margin-bottom: 22px; }
 .sperhake-success .sperhake-detail { flex-direction: row; justify-content: space-between; border-bottom: 1px solid #eef0f3; padding: 10px 0; }
+
+/* Post-payment vehicle card auto-rendered above the search form: it lives
+   outside .sperhake-widget, so it needs its own copy of the theme tokens. */
+.sperhake-results--post-payment {
+	--sperhake-primary: #0f2a4a;
+	--sperhake-accent: #1d6fe0;
+	max-width: 720px;
+	margin: 0 auto 24px;
+}
 
 @media (max-width: 560px) {
 	.sperhake-vehicle__grid { grid-template-columns: 1fr; }

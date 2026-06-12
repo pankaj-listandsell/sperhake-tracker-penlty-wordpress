@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace SperhakeTracker\Frontend;
 
+use SperhakeTracker\Api\VehicleApiClient;
 use SperhakeTracker\Database\TransactionRepository;
 use SperhakeTracker\Support\Options;
 
@@ -20,7 +21,8 @@ final class Shortcode {
 
 	public function __construct(
 		private readonly TransactionRepository $transactions,
-		private readonly Options $options
+		private readonly Options $options,
+		private readonly VehicleApiClient $api
 	) {}
 
 	public function register(): void {
@@ -101,6 +103,59 @@ final class Shortcode {
 		if ( $template ) {
 			include $template;
 		}
+
+		// Automatically re-run the vehicle search so the customer immediately sees
+		// the relocation destination and route map without re-entering their plate.
+		$this->render_post_payment_vehicle( $transaction );
+	}
+
+	/**
+	 * Call the search API for the just-paid vehicle and render its result card
+	 * (relocation destination + route map) beneath the confirmation panel.
+	 */
+	private function render_post_payment_vehicle( object $transaction ): void {
+		$plate = (string) $transaction->license_plate;
+		if ( '' === $plate ) {
+			return;
+		}
+
+		// The reference (second factor) was stored alongside the transaction.
+		$reference = '';
+		if ( ! empty( $transaction->meta ) ) {
+			$meta = json_decode( (string) $transaction->meta, true );
+			if ( is_array( $meta ) && isset( $meta['reference'] ) ) {
+				$reference = (string) $meta['reference'];
+			}
+		}
+
+		$result = $this->api->search_vehicle( $plate, $reference );
+		if ( empty( $result['ok'] ) || empty( $result['data'] ) ) {
+			return;
+		}
+
+		// Only surface the relocation/route card once the API confirms payment.
+		// The destination is populated post-payment, and the relocation API may
+		// briefly still report the case as unpaid (webhook sync is async) — in
+		// which case we avoid re-rendering a stale "Pay Now" button.
+		if ( empty( $result['data']['is_paid'] ) ) {
+			return;
+		}
+
+		$template = $this->locate_template( 'frontend/vehicle-result.php' );
+		if ( '' === $template ) {
+			return;
+		}
+
+		$vehicle              = $result['data'];
+		$vehicle['reference'] = $reference; // Carry through for the pay step (no-op once paid).
+
+		// Nonces consumed by the result template's pay/invoice buttons.
+		$pay_nonce     = wp_create_nonce( 'sperhake_pay' );
+		$invoice_nonce = wp_create_nonce( 'sperhake_invoice' );
+
+		echo '<div class="sperhake-results sperhake-results--post-payment" aria-live="polite">';
+		include $template;
+		echo '</div>';
 	}
 
 	/**

@@ -64,11 +64,28 @@ $row = static function ( string $label, string $value ): void {
 
 	if ( $is_paid ) :
 		// Paid case: show the relocation destination plus map & invoice actions.
-		$dest      = trim( (string) ( $vehicle['destination_address'] ?? '' ) );
-		$dest_lat  = (string) ( $vehicle['destination_lat'] ?? '' );
-		$dest_lng  = (string) ( $vehicle['destination_lng'] ?? '' );
-		$map_query = ( '' !== $dest_lat && '' !== $dest_lng ) ? $dest_lat . ',' . $dest_lng : $dest;
-		$map_url   = '' !== $map_query ? 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode( $map_query ) : '';
+		$dest     = trim( (string) ( $vehicle['destination_address'] ?? '' ) );
+		$dest_lat = (string) ( $vehicle['destination_lat'] ?? '' );
+		$dest_lng = (string) ( $vehicle['destination_lng'] ?? '' );
+
+		// Origin = where the vehicle was towed from; destination = where it now sits.
+		$origin_addr = trim( (string) ( $vehicle['pickup_address'] ?? '' ) );
+		$dest_point  = ( '' !== $dest_lat && '' !== $dest_lng ) ? $dest_lat . ',' . $dest_lng : $dest;
+
+		if ( '' !== $dest_point && '' !== $origin_addr ) {
+			// Plot both pins and the driving route between them.
+			$map_url   = 'https://www.google.com/maps/dir/?api=1'
+				. '&origin=' . rawurlencode( $origin_addr )
+				. '&destination=' . rawurlencode( $dest_point );
+			$map_label = __( 'View Route on Map', 'sperhake-tracker' );
+		} elseif ( '' !== $dest_point ) {
+			// Only the destination is known — drop a single pin.
+			$map_url   = 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode( $dest_point );
+			$map_label = __( 'Track on Map', 'sperhake-tracker' );
+		} else {
+			$map_url   = '';
+			$map_label = '';
+		}
 		?>
 		<div class="sperhake-penalty is-paid">
 			<div class="sperhake-penalty__clear"><?php esc_html_e( 'Penalty Paid', 'sperhake-tracker' ); ?></div>
@@ -76,15 +93,29 @@ $row = static function ( string $label, string $value ): void {
 
 		<?php if ( '' !== $dest ) : ?>
 			<div class="sperhake-vehicle__destination">
-				<h4><?php esc_html_e( 'Vehicle Relocated To', 'sperhake-tracker' ); ?></h4>
-				<p class="sperhake-destination__address"><?php echo esc_html( $dest ); ?></p>
+				<?php if ( '' !== $origin_addr ) : ?>
+					<div class="sperhake-route">
+						<div class="sperhake-route__leg">
+							<span class="sperhake-route__label"><?php esc_html_e( 'Towed From', 'sperhake-tracker' ); ?></span>
+							<span class="sperhake-route__address"><?php echo esc_html( $origin_addr ); ?></span>
+						</div>
+						<div class="sperhake-route__arrow" aria-hidden="true">→</div>
+						<div class="sperhake-route__leg">
+							<span class="sperhake-route__label"><?php esc_html_e( 'Relocated To', 'sperhake-tracker' ); ?></span>
+							<span class="sperhake-route__address"><?php echo esc_html( $dest ); ?></span>
+						</div>
+					</div>
+				<?php else : ?>
+					<h4><?php esc_html_e( 'Vehicle Relocated To', 'sperhake-tracker' ); ?></h4>
+					<p class="sperhake-destination__address"><?php echo esc_html( $dest ); ?></p>
+				<?php endif; ?>
 			</div>
 		<?php endif; ?>
 
 		<div class="sperhake-destination__actions">
 			<?php if ( '' !== $map_url ) : ?>
 				<a class="sperhake-btn sperhake-btn--map" href="<?php echo esc_url( $map_url ); ?>" target="_blank" rel="noopener noreferrer">
-					<?php esc_html_e( 'Track on Map', 'sperhake-tracker' ); ?>
+					<?php echo esc_html( $map_label ); ?>
 				</a>
 			<?php endif; ?>
 			<button

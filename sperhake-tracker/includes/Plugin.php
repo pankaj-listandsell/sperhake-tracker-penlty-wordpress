@@ -153,7 +153,7 @@ final class Plugin {
 
 	private function register_frontend(): void {
 		$assets    = new Assets( $this->get( 'options' ) );
-		$shortcode = new Shortcode( $this->get( 'transactions' ), $this->get( 'options' ) );
+		$shortcode = new Shortcode( $this->get( 'transactions' ), $this->get( 'options' ), $this->get( 'vehicle_api' ) );
 		$ajax      = new AjaxHandler(
 			$this->get( 'vehicle_api' ),
 			$this->get( 'options' ),

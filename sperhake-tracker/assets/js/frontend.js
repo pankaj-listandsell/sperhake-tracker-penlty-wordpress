@@ -122,6 +122,11 @@
 			} );
 		} );
 
+		// Wire up any server-rendered result card (e.g. the post-payment
+		// confirmation auto-shown above the form when returning from Stripe).
+		bindPayButton();
+		bindInvoiceButton();
+
 		function resetTurnstile() {
 			// Turnstile tokens are single-use; reset so the next submit gets a fresh one.
 			if ( cfg.turnstileEnabled && window.turnstile && typeof window.turnstile.reset === 'function' ) {
