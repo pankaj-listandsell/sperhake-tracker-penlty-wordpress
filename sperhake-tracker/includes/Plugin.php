@@ -71,7 +71,36 @@ final class Plugin {
 		// Run any pending schema upgrade (e.g. new search-logs table).
 		Schema::maybe_upgrade();
 
-		// Internationalisation.
+		// Internationalisation. German is the default UI language regardless of
+		// the site locale; override via the 'sperhake_tracker_locale' filter.
+		$plugin_locale = static function ( string $locale, string $domain ): string {
+			if ( 'sperhake-tracker' !== $domain ) {
+				return $locale;
+			}
+
+			return (string) apply_filters( 'sperhake_tracker_locale', 'de_DE', $locale );
+		};
+		add_filter( 'plugin_locale', $plugin_locale, 10, 2 );
+
+		// Force our bundled translation file whenever the domain is loaded — this
+		// also covers WordPress 6.7+ just-in-time loading on the frontend, which
+		// uses the site locale (e.g. en_US) and ignores the 'plugin_locale' filter.
+		add_filter(
+			'load_textdomain_mofile',
+			static function ( string $mofile, string $domain ) use ( $plugin_locale ): string {
+				if ( 'sperhake-tracker' !== $domain ) {
+					return $mofile;
+				}
+
+				$locale = $plugin_locale( '', $domain );
+				$forced = SPERHAKE_TRACKER_DIR . 'languages/sperhake-tracker-' . $locale . '.mo';
+
+				return is_readable( $forced ) ? $forced : $mofile;
+			},
+			10,
+			2
+		);
+
 		add_action(
 			'init',
 			static function (): void {

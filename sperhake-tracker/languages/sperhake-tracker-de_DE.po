@@ -1,0 +1,565 @@
+# German translation for Sperhake Vehicle Tracking & Penalty Payment.
+# This file is distributed under the GPL-2.0-or-later license.
+msgid ""
+msgstr ""
+"Project-Id-Version: Sperhake Vehicle Tracking & Penalty Payment 1.3.0\n"
+"Report-Msgid-Bugs-To: https://abschleppdienst-sperhake.de/\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: sperhake-tracker\n"
+
+msgid "%s record(s) found."
+msgstr "%s Datensätze gefunden."
+
+msgid "A reference number is required."
+msgstr "Eine Referenznummer ist erforderlich."
+
+msgid "API Key"
+msgstr "API-Schlüssel"
+
+msgid "API Secret"
+msgstr "API-Secret"
+
+msgid "API Settings"
+msgstr "API-Einstellungen"
+
+msgid "API Sync"
+msgstr "API-Synchronisierung"
+
+msgid "API URL"
+msgstr "API-URL"
+
+msgid "Add this URL as a Stripe webhook endpoint and subscribe to checkout.session.completed."
+msgstr "Fügen Sie diese URL als Stripe-Webhook-Endpunkt hinzu und abonnieren Sie checkout.session.completed."
+
+msgid "All levels"
+msgstr "Alle Stufen"
+
+msgid "All statuses"
+msgstr "Alle Status"
+
+msgid "Amount"
+msgstr "Betrag"
+
+msgid "Amount Paid"
+msgstr "Gezahlter Betrag"
+
+msgid "Attach PDF receipt"
+msgstr "PDF-Beleg anhängen"
+
+msgid "Case Number"
+msgstr "Fallnummer"
+
+msgid "Channel"
+msgstr "Kanal"
+
+msgid "Cloudflare Turnstile site key. Leave blank to disable the CAPTCHA."
+msgstr "Cloudflare-Turnstile-Site-Key. Leer lassen, um das CAPTCHA zu deaktivieren."
+
+msgid "Contact"
+msgstr "Kontakt"
+
+msgid "Context"
+msgstr "Kontext"
+
+msgid "Could not reach the payment provider. Please try again."
+msgstr "Der Zahlungsanbieter konnte nicht erreicht werden. Bitte versuchen Sie es erneut."
+
+msgid "Could not request the invoice."
+msgstr "Die Rechnung konnte nicht angefordert werden."
+
+msgid "Could not start the payment. Please try again."
+msgstr "Die Zahlung konnte nicht gestartet werden. Bitte versuchen Sie es erneut."
+
+msgid "Currency"
+msgstr "Währung"
+
+msgid "Current Location"
+msgstr "Aktueller Standort"
+
+msgid "Custom Request Headers"
+msgstr "Benutzerdefinierte Request-Header"
+
+msgid "Customer"
+msgstr "Kunde"
+
+msgid "Customer Email"
+msgstr "Kunden-E-Mail"
+
+msgid "Customer Name"
+msgstr "Kundenname"
+
+msgid "Dashboard"
+msgstr "Übersicht"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Debug"
+msgstr "Debug"
+
+msgid "Download Receipt"
+msgstr "Beleg herunterladen"
+
+msgid "Email"
+msgstr "E-Mail"
+
+msgid "Email Settings"
+msgstr "E-Mail-Einstellungen"
+
+msgid "Email Subject"
+msgstr "E-Mail-Betreff"
+
+msgid "Enable SEPA Direct Debit"
+msgstr "SEPA-Lastschrift aktivieren"
+
+msgid "Enabled"
+msgstr "Aktiviert"
+
+msgid "Enter your license plate to check your vehicle status and pay any outstanding penalty."
+msgstr "Geben Sie Ihr Kennzeichen ein, um den Fahrzeugstatus zu prüfen und offene Gebühren zu bezahlen."
+
+msgid "Error"
+msgstr "Fehler"
+
+msgid "Every 5 minutes (Sperhake)"
+msgstr "Alle 5 Minuten (Sperhake)"
+
+msgid "Export CSV"
+msgstr "CSV exportieren"
+
+msgid "Failed"
+msgstr "Fehlgeschlagen"
+
+msgid "Failed API Syncs"
+msgstr "Fehlgeschlagene API-Synchronisierungen"
+
+msgid "Filter"
+msgstr "Filtern"
+
+msgid "Find Your Vehicle"
+msgstr "Finden Sie Ihr Fahrzeug"
+
+msgid "Forces a second identifier alongside the plate to prevent enumeration."
+msgstr "Erzwingt eine zweite Kennung zusätzlich zum Kennzeichen, um Enumeration zu verhindern."
+
+msgid "Forward Webhook URL"
+msgstr "Webhook-URL weiterleiten"
+
+msgid "From Email"
+msgstr "Absender-E-Mail"
+
+msgid "From Name"
+msgstr "Absendername"
+
+msgid "Frontend Search Security"
+msgstr "Sicherheit der Frontend-Suche"
+
+msgid "IP Address"
+msgstr "IP-Adresse"
+
+msgid "If you have any questions about this payment, please contact %s."
+msgstr "Bei Fragen zu dieser Zahlung wenden Sie sich bitte an %s."
+
+msgid "Info"
+msgstr "Info"
+
+msgid "Insufficient permissions."
+msgstr "Unzureichende Berechtigungen."
+
+msgid "Invalid license plate."
+msgstr "Ungültiges Kennzeichen."
+
+msgid "Invoice requested."
+msgstr "Rechnung angefordert."
+
+msgid "Invoice requested. It will be emailed to you shortly."
+msgstr "Rechnung angefordert. Sie wird Ihnen in Kürze per E-Mail zugesandt."
+
+msgid "Invoice requested. Please check your email."
+msgstr "Rechnung angefordert. Bitte prüfen Sie Ihre E-Mails."
+
+msgid "Invoice requests are temporarily unavailable. Please contact us."
+msgstr "Rechnungsanforderungen sind vorübergehend nicht verfügbar. Bitte kontaktieren Sie uns."
+
+msgid "Level"
+msgstr "Stufe"
+
+msgid "License Plate"
+msgstr "Kennzeichen"
+
+msgid "License plate"
+msgstr "Kennzeichen"
+
+msgid "Link expired"
+msgstr "Link abgelaufen"
+
+msgid "Live"
+msgstr "Live"
+
+msgid "Logo URL"
+msgstr "Logo-URL"
+
+msgid "Message"
+msgstr "Nachricht"
+
+msgid "Missing case reference."
+msgstr "Fehlende Fallreferenz."
+
+msgid "Mode"
+msgstr "Modus"
+
+msgid "No Outstanding Penalties"
+msgstr "Keine offenen Gebühren"
+
+msgid "No log entries."
+msgstr "Keine Protokolleinträge."
+
+msgid "No searches recorded."
+msgstr "Keine Suchanfragen aufgezeichnet."
+
+msgid "No transactions found."
+msgstr "Keine Transaktionen gefunden."
+
+msgid "No vehicle matched that plate and reference."
+msgstr "Kein Fahrzeug stimmte mit diesem Kennzeichen und dieser Referenz überein."
+
+msgid "No vehicle was found for that license plate."
+msgstr "Für dieses Kennzeichen wurde kein Fahrzeug gefunden."
+
+msgid "Not set"
+msgstr "Nicht festgelegt"
+
+msgid "One per line, e.g. X-Tenant: sperhake"
+msgstr "Eine pro Zeile, z. B. X-Tenant: sperhake"
+
+msgid "Outstanding Penalty"
+msgstr "Offene Gebühr"
+
+msgid "Outstanding penalty payment to Abschleppdienst Sperhake."
+msgstr "Zahlung offener Gebühren an Abschleppdienst Sperhake."
+
+msgid "Owner"
+msgstr "Halter"
+
+msgid "Paid"
+msgstr "Bezahlt"
+
+msgid "Pay Now – %s"
+msgstr "Jetzt bezahlen – %s"
+
+msgid "Payment"
+msgstr "Zahlung"
+
+msgid "Payment Receipt"
+msgstr "Zahlungsbeleg"
+
+msgid "Payment Status"
+msgstr "Zahlungsstatus"
+
+msgid "Payment Successful"
+msgstr "Zahlung erfolgreich"
+
+msgid "Payment is being processed"
+msgstr "Zahlung wird verarbeitet"
+
+msgid "Payments Received"
+msgstr "Erhaltene Zahlungen"
+
+msgid "Payments are temporarily unavailable."
+msgstr "Zahlungen sind vorübergehend nicht verfügbar."
+
+msgid "Penalty Paid"
+msgstr "Gebühr bezahlt"
+
+msgid "Pending"
+msgstr "Ausstehend"
+
+msgid "Personal data in towing penalty records was anonymised. Financial fields are retained for legal/accounting obligations."
+msgstr "Personenbezogene Daten in den Abschlepp-Gebührendatensätzen wurden anonymisiert. Finanzdaten werden aufgrund gesetzlicher/buchhalterischer Pflichten aufbewahrt."
+
+msgid "Please complete the verification first."
+msgstr "Bitte schließen Sie zuerst die Verifizierung ab."
+
+msgid "Please enter a license plate."
+msgstr "Bitte geben Sie ein Kennzeichen ein."
+
+msgid "Please enter a valid email address."
+msgstr "Bitte geben Sie eine gültige E-Mail-Adresse ein."
+
+msgid "Please enter a valid license plate."
+msgstr "Bitte geben Sie ein gültiges Kennzeichen ein."
+
+msgid "Please enter the required reference."
+msgstr "Bitte geben Sie die erforderliche Referenz ein."
+
+msgid "Please enter your %s to look up this vehicle."
+msgstr "Bitte geben Sie Ihre %s ein, um dieses Fahrzeug zu suchen."
+
+msgid "Plugin activation error"
+msgstr "Fehler bei der Plugin-Aktivierung"
+
+msgid "Protect the public search form against bots and plate enumeration."
+msgstr "Schützt das öffentliche Suchformular vor Bots und Kennzeichen-Enumeration."
+
+msgid "Publishable Key"
+msgstr "Publishable Key"
+
+msgid "Receipt"
+msgstr "Beleg"
+
+msgid "Receipt file is unavailable."
+msgstr "Belegdatei ist nicht verfügbar."
+
+msgid "Receipt not found."
+msgstr "Beleg nicht gefunden."
+
+msgid "Recent vehicle searches, for abuse/enumeration detection. IPs are shown for the retained window only."
+msgstr "Aktuelle Fahrzeugsuchen zur Erkennung von Missbrauch/Enumeration. IP-Adressen werden nur für den Aufbewahrungszeitraum angezeigt."
+
+msgid "Redirecting to secure checkout…"
+msgstr "Weiterleitung zur sicheren Kasse…"
+
+msgid "Reference field label"
+msgstr "Bezeichnung des Referenzfelds"
+
+msgid "Reference?"
+msgstr "Referenz?"
+
+msgid "Relocated To"
+msgstr "Verbracht nach"
+
+msgid "Request Invoice"
+msgstr "Rechnung anfordern"
+
+msgid "Request Timeout (seconds)"
+msgstr "Anfrage-Timeout (Sekunden)"
+
+msgid "Requesting…"
+msgstr "Wird angefordert…"
+
+msgid "Require reference number"
+msgstr "Referenznummer erforderlich"
+
+msgid "Result"
+msgstr "Ergebnis"
+
+msgid "Search Audit Log"
+msgstr "Such-Audit-Protokoll"
+
+msgid "Search Vehicle"
+msgstr "Fahrzeug suchen"
+
+msgid "Search shortcode"
+msgstr "Such-Shortcode"
+
+msgid "Searching…"
+msgstr "Suche läuft…"
+
+msgid "Secret Key"
+msgstr "Geheimer Schlüssel"
+
+msgid "Secure payment powered by Stripe. Cards, Apple Pay & Google Pay accepted."
+msgstr "Sichere Zahlung über Stripe. Karten, Apple Pay & Google Pay akzeptiert."
+
+msgid "Send invoice to a different email (optional)"
+msgstr "Rechnung an eine andere E-Mail senden (optional)"
+
+msgid "Setup Checklist"
+msgstr "Einrichtungs-Checkliste"
+
+msgid "Something went wrong. Please try again."
+msgstr "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+
+msgid "Sperhake Tracker"
+msgstr "Sperhake Tracker"
+
+msgid "Sperhake Tracker – Dashboard"
+msgstr "Sperhake Tracker – Übersicht"
+
+msgid "Sperhake Vehicle Tracker"
+msgstr "Sperhake Vehicle Tracker"
+
+msgid "Sperhake Vehicle Tracker requires PHP 8.2 or higher."
+msgstr "Sperhake Vehicle Tracker erfordert PHP 8.2 oder höher."
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Storage Address"
+msgstr "Adresse der Verwahrstelle"
+
+msgid "Storage Yard"
+msgstr "Verwahrstelle"
+
+msgid "Stored encrypted. Leave blank to keep the current value."
+msgstr "Verschlüsselt gespeichert. Leer lassen, um den aktuellen Wert beizubehalten."
+
+msgid "Stripe Configuration"
+msgstr "Stripe-Konfiguration"
+
+msgid "Stripe Settings"
+msgstr "Stripe-Einstellungen"
+
+msgid "Stripe is not configured. Visit Stripe Settings to enable payments."
+msgstr "Stripe ist nicht konfiguriert. Öffnen Sie die Stripe-Einstellungen, um Zahlungen zu aktivieren."
+
+msgid "Stripe mode"
+msgstr "Stripe-Modus"
+
+msgid "Stripe webhook endpoint"
+msgstr "Stripe-Webhook-Endpunkt"
+
+msgid "System Logs"
+msgstr "Systemprotokolle"
+
+msgid "Test"
+msgstr "Test"
+
+msgid "Thank you for your payment"
+msgstr "Vielen Dank für Ihre Zahlung"
+
+msgid "Thank you for your payment."
+msgstr "Vielen Dank für Ihre Zahlung."
+
+msgid "The Vehicle Tracking API URL is not configured yet. Visit API Settings to get started."
+msgstr "Die API-URL für die Fahrzeugverfolgung ist noch nicht konfiguriert. Öffnen Sie die API-Einstellungen, um zu beginnen."
+
+msgid "The invoice could not be requested right now. Please try again later."
+msgstr "Die Rechnung konnte derzeit nicht angefordert werden. Bitte versuchen Sie es später erneut."
+
+msgid "There is no outstanding penalty to pay for this vehicle."
+msgstr "Für dieses Fahrzeug ist keine offene Gebühr zu zahlen."
+
+msgid "This download link is valid for 24 hours. The receipt is also attached as a PDF."
+msgstr "Dieser Download-Link ist 24 Stunden gültig. Der Beleg ist außerdem als PDF angehängt."
+
+msgid "This is a computer-generated receipt issued by %s. No signature is required."
+msgstr "Dies ist ein computergenerierter Beleg, ausgestellt von %s. Eine Unterschrift ist nicht erforderlich."
+
+msgid "This penalty has already been paid."
+msgstr "Diese Gebühr wurde bereits bezahlt."
+
+msgid "This receipt link has expired. Please contact us to request a new copy."
+msgstr "Dieser Beleg-Link ist abgelaufen. Bitte kontaktieren Sie uns, um eine neue Kopie anzufordern."
+
+msgid "Time (UTC)"
+msgstr "Zeit (UTC)"
+
+msgid "Too many requests. Please wait a moment and try again."
+msgstr "Zu viele Anfragen. Bitte warten Sie einen Moment und versuchen Sie es erneut."
+
+msgid "Total Collected (EUR)"
+msgstr "Gesamt eingenommen (EUR)"
+
+msgid "Towed Date"
+msgstr "Abschleppdatum"
+
+msgid "Towed From"
+msgstr "Abgeschleppt von"
+
+msgid "Towed Time"
+msgstr "Abschleppzeit"
+
+msgid "Towing Location"
+msgstr "Abschlepport"
+
+msgid "Towing penalty payments"
+msgstr "Abschleppgebühren-Zahlungen"
+
+msgid "Towing penalty – %s"
+msgstr "Abschleppgebühr – %s"
+
+msgid "Track on Map"
+msgstr "Auf Karte verfolgen"
+
+msgid "Transaction ID"
+msgstr "Transaktions-ID"
+
+msgid "Transaction Logs"
+msgstr "Transaktionsprotokolle"
+
+msgid "Turnstile Secret Key"
+msgstr "Turnstile-Secret-Key"
+
+msgid "Turnstile Site Key"
+msgstr "Turnstile-Site-Key"
+
+msgid "Unexpected response from the vehicle database."
+msgstr "Unerwartete Antwort von der Fahrzeugdatenbank."
+
+msgid "Vehicle Found"
+msgstr "Fahrzeug gefunden"
+
+msgid "Vehicle ID"
+msgstr "Fahrzeug-ID"
+
+msgid "Vehicle Release Instructions"
+msgstr "Hinweise zur Fahrzeugherausgabe"
+
+msgid "Vehicle Relocated To"
+msgstr "Fahrzeug verbracht nach"
+
+msgid "Vehicle Tracking API"
+msgstr "Fahrzeugverfolgungs-API"
+
+msgid "Vehicle lookup is temporarily unavailable. Please contact us."
+msgstr "Die Fahrzeugsuche ist vorübergehend nicht verfügbar. Bitte kontaktieren Sie uns."
+
+msgid "Vehicle not found."
+msgstr "Fahrzeug nicht gefunden."
+
+msgid "Verification failed. Please complete the challenge and try again."
+msgstr "Verifizierung fehlgeschlagen. Bitte schließen Sie die Prüfung ab und versuchen Sie es erneut."
+
+msgid "View Route on Map"
+msgstr "Route auf Karte anzeigen"
+
+msgid "View not found."
+msgstr "Ansicht nicht gefunden."
+
+msgid "Warning"
+msgstr "Warnung"
+
+msgid "We could not reach the invoice service. Please try again shortly."
+msgstr "Wir konnten den Rechnungsdienst nicht erreichen. Bitte versuchen Sie es in Kürze erneut."
+
+msgid "We could not reach the vehicle database. Please try again shortly."
+msgstr "Wir konnten die Fahrzeugdatenbank nicht erreichen. Bitte versuchen Sie es in Kürze erneut."
+
+msgid "We have received your penalty payment. A copy of your receipt is attached to this email for your records."
+msgstr "Wir haben Ihre Gebührenzahlung erhalten. Eine Kopie Ihres Belegs ist dieser E-Mail für Ihre Unterlagen beigefügt."
+
+msgid "We have received your request and will confirm shortly. You will receive an email once the payment is complete."
+msgstr "Wir haben Ihre Anfrage erhalten und bestätigen sie in Kürze. Sie erhalten eine E-Mail, sobald die Zahlung abgeschlossen ist."
+
+msgid "Webhook Signing Secret"
+msgstr "Webhook-Signing-Secret"
+
+msgid "Where completed payments are posted after success."
+msgstr "Wohin abgeschlossene Zahlungen nach erfolgreicher Zahlung gesendet werden."
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "You do not have permission to access this page."
+msgstr "Sie haben keine Berechtigung, auf diese Seite zuzugreifen."
+
+msgid "Your %s is printed on the notice left on or near your vehicle."
+msgstr "Ihre %s steht auf dem Hinweis, der an oder in der Nähe Ihres Fahrzeugs hinterlassen wurde."
+
+msgid "Your Webhook Endpoint"
+msgstr "Ihr Webhook-Endpunkt"
+
+msgid "Your payment receipt – Abschleppdienst Sperhake"
+msgstr "Ihr Zahlungsbeleg – Abschleppdienst Sperhake"
+
+msgid "Your receipt is being generated and has been emailed to you."
+msgstr "Ihr Beleg wird erstellt und wurde Ihnen per E-Mail zugesandt."
+
+msgid "e.g. \"Case Number\" or \"Reference Number\". Sent to the API as \"reference\"."
+msgstr "z. B. „Fallnummer“ oder „Referenznummer“. Wird als „reference“ an die API gesendet."
+

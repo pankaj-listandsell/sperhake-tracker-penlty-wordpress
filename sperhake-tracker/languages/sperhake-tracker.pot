@@ -2,32 +2,782 @@
 # This file is distributed under the GPL-2.0-or-later license.
 msgid ""
 msgstr ""
-"Project-Id-Version: Sperhake Vehicle Tracking & Penalty Payment 1.0.0\n"
+"Project-Id-Version: Sperhake Vehicle Tracking & Penalty Payment 1.3.0\n"
 "Report-Msgid-Bugs-To: https://abschleppdienst-sperhake.de/\n"
+"POT-Creation-Date: 2026-06-12 12:10+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Domain: sperhake-tracker\n"
 
-#. Plugin Name
+#. Plugin Name of the plugin
 msgid "Sperhake Vehicle Tracking & Penalty Payment"
 msgstr ""
 
-msgid "Search Vehicle"
+#. Description of the plugin
+msgid "Vehicle lookup by license plate, towing status, and online penalty payment via Stripe for Abschleppdienst Sperhake."
 msgstr ""
 
+#. Author of the plugin
+msgid "Abschleppdienst Sperhake"
+msgstr ""
+
+#: admin/Pages/transactions.php:64
+msgid "%s record(s) found."
+msgstr ""
+
+#: payments/StripeGateway.php:68
+msgid "A reference number is required."
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:61
+msgid "API Key"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:62
+msgid "API Secret"
+msgstr ""
+
+#: admin/AdminMenu.php:54 admin/AdminMenu.php:91
+msgid "API Settings"
+msgstr ""
+
+#: admin/Pages/transactions.php:78
+msgid "API Sync"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:60
+msgid "API URL"
+msgstr ""
+
+#: emails/Mailer.php:95 pdf/ReceiptGenerator.php:122
+msgid "Abschleppdienst Sperhake"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:270
+msgid "Add this URL as a Stripe webhook endpoint and subscribe to checkout.session.completed."
+msgstr ""
+
+#: admin/Pages/logs.php:20
+msgid "All levels"
+msgstr ""
+
+#: admin/Pages/transactions.php:22
+msgid "All statuses"
+msgstr ""
+
+#: admin/Pages/transactions.php:76 includes/GDPR/PrivacyManager.php:100
+msgid "Amount"
+msgstr ""
+
+#: templates/emails/receipt.php:49 templates/frontend/payment-success.php:30
+#: templates/pdf-receipt.php:70
+msgid "Amount Paid"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:167
+msgid "Attach PDF receipt"
+msgstr ""
+
+#: includes/Support/Options.php:152 templates/frontend/search-form.php:23
+msgid "Case Number"
+msgstr ""
+
+#: admin/Pages/logs.php:44
+msgid "Channel"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:70
+msgid "Cloudflare Turnstile site key. Leave blank to disable the CAPTCHA."
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:51
+msgid "Contact"
+msgstr ""
+
+#: admin/Pages/logs.php:46
+msgid "Context"
+msgstr ""
+
+#: payments/StripeGateway.php:185
+msgid "Could not reach the payment provider. Please try again."
+msgstr ""
+
+#: frontend/AjaxHandler.php:67
+msgid "Could not request the invoice."
+msgstr ""
+
+#: payments/StripeGateway.php:107
+msgid "Could not start the payment. Please try again."
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:123
+msgid "Currency"
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:50
+msgid "Current Location"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:63
+msgid "Custom Request Headers"
+msgstr ""
+
+#: admin/Pages/transactions.php:75 templates/frontend/payment-success.php:27
+#: templates/pdf-receipt.php:58
+msgid "Customer"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:161
+msgid "Customer Email"
+msgstr ""
+
+#: includes/GDPR/PrivacyManager.php:98
+msgid "Customer Name"
+msgstr ""
+
+#: admin/AdminMenu.php:53
+msgid "Dashboard"
+msgstr ""
+
+#: admin/Pages/transactions.php:79 includes/GDPR/PrivacyManager.php:102
+#: templates/emails/receipt.php:50 templates/frontend/payment-success.php:31
+msgid "Date"
+msgstr ""
+
+#: admin/Pages/logs.php:24
+msgid "Debug"
+msgstr ""
+
+#: templates/emails/receipt.php:66 templates/frontend/payment-success.php:35
+msgid "Download Receipt"
+msgstr ""
+
+#: includes/GDPR/PrivacyManager.php:99 templates/pdf-receipt.php:61
+msgid "Email"
+msgstr ""
+
+#: admin/AdminMenu.php:56 admin/AdminMenu.php:101
+msgid "Email Settings"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:165
+msgid "Email Subject"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:124
+msgid "Enable SEPA Direct Debit"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:252
+msgid "Enabled"
+msgstr ""
+
+#: templates/frontend/search-form.php:29
+msgid "Enter your license plate to check your vehicle status and pay any outstanding penalty."
+msgstr ""
+
+#: admin/Pages/logs.php:23
+msgid "Error"
+msgstr ""
+
+#: includes/Cron/RetryQueue.php:51
+msgid "Every 5 minutes (Sperhake)"
+msgstr ""
+
+#: admin/Pages/transactions.php:44
+msgid "Export CSV"
+msgstr ""
+
+#: admin/Pages/transactions.php:25
+msgid "Failed"
+msgstr ""
+
+#: admin/Pages/dashboard.php:49
+msgid "Failed API Syncs"
+msgstr ""
+
+#: admin/Pages/transactions.php:57
+msgid "Filter"
+msgstr ""
+
+#: frontend/Shortcode.php:40 templates/frontend/search-form.php:19
+msgid "Find Your Vehicle"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:72
+msgid "Forces a second identifier alongside the plate to prevent enumeration."
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:64
+msgid "Forward Webhook URL"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:164
+msgid "From Email"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:163
+msgid "From Name"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:68
+msgid "Frontend Search Security"
+msgstr ""
+
+#: admin/Pages/logs.php:75
+msgid "IP Address"
+msgstr ""
+
+#: templates/emails/receipt.php:77
+msgid "If you have any questions about this payment, please contact %s."
+msgstr ""
+
+#: admin/Pages/logs.php:21
+msgid "Info"
+msgstr ""
+
+#: admin/AdminMenu.php:147
+msgid "Insufficient permissions."
+msgstr ""
+
+#: payments/StripeGateway.php:63
+msgid "Invalid license plate."
+msgstr ""
+
+#: frontend/AjaxHandler.php:72
+msgid "Invoice requested."
+msgstr ""
+
+#: api/VehicleApiClient.php:232
+msgid "Invoice requested. It will be emailed to you shortly."
+msgstr ""
+
+#: frontend/Assets.php:79
+msgid "Invoice requested. Please check your email."
+msgstr ""
+
+#: api/VehicleApiClient.php:180
+msgid "Invoice requests are temporarily unavailable. Please contact us."
+msgstr ""
+
+#: admin/Pages/logs.php:43
+msgid "Level"
+msgstr ""
+
+#: admin/Pages/logs.php:72 admin/Pages/transactions.php:74
+#: includes/GDPR/PrivacyManager.php:97 templates/emails/receipt.php:48
+#: templates/frontend/payment-success.php:29
+#: templates/frontend/search-form.php:35 templates/pdf-receipt.php:53
 msgid "License Plate"
 msgstr ""
 
-msgid "Outstanding Penalty"
+#: admin/Pages/transactions.php:54
+msgid "License plate"
 msgstr ""
 
+#: frontend/AjaxHandler.php:175
+msgid "Link expired"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:259
+msgid "Live"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:166
+msgid "Logo URL"
+msgstr ""
+
+#: admin/Pages/logs.php:45
+msgid "Message"
+msgstr ""
+
+#: frontend/AjaxHandler.php:56
+msgid "Missing case reference."
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:119
+msgid "Mode"
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:167
 msgid "No Outstanding Penalties"
 msgstr ""
 
+#: admin/Pages/logs.php:51
+msgid "No log entries."
+msgstr ""
+
+#: admin/Pages/logs.php:80
+msgid "No searches recorded."
+msgstr ""
+
+#: admin/Pages/transactions.php:84
+msgid "No transactions found."
+msgstr ""
+
+#: api/VehicleApiClient.php:106
+msgid "No vehicle matched that plate and reference."
+msgstr ""
+
+#: api/VehicleApiClient.php:77
+msgid "No vehicle was found for that license plate."
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:232
+msgid "Not set"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:63
+msgid "One per line, e.g. X-Tenant: sperhake"
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:145
+msgid "Outstanding Penalty"
+msgstr ""
+
+#: payments/StripeGateway.php:142
+msgid "Outstanding penalty payment to Abschleppdienst Sperhake."
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:42
+msgid "Owner"
+msgstr ""
+
+#: admin/Pages/transactions.php:23 templates/emails/receipt.php:51
+#: templates/frontend/payment-success.php:32 templates/pdf-receipt.php:66
+msgid "Paid"
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:159
+msgid "Pay Now – %s"
+msgstr ""
+
+#: admin/Pages/transactions.php:77
+msgid "Payment"
+msgstr ""
+
+#: pdf/ReceiptGenerator.php:128 templates/pdf-receipt.php:44
+msgid "Payment Receipt"
+msgstr ""
+
+#: templates/pdf-receipt.php:66
+msgid "Payment Status"
+msgstr ""
+
+#: templates/frontend/payment-success.php:23
 msgid "Payment Successful"
 msgstr ""
 
-msgid "Download Receipt"
+#: templates/frontend/payment-success.php:40
+msgid "Payment is being processed"
 msgstr ""
+
+#: admin/Pages/dashboard.php:37
+msgid "Payments Received"
+msgstr ""
+
+#: payments/StripeGateway.php:50 payments/StripeGateway.php:56
+msgid "Payments are temporarily unavailable."
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:91
+msgid "Penalty Paid"
+msgstr ""
+
+#: admin/Pages/dashboard.php:45 admin/Pages/transactions.php:24
+msgid "Pending"
+msgstr ""
+
+#: includes/GDPR/PrivacyManager.php:125
+msgid "Personal data in towing penalty records was anonymised. Financial fields are retained for legal/accounting obligations."
+msgstr ""
+
+#: frontend/Assets.php:77
+msgid "Please complete the verification first."
+msgstr ""
+
+#: frontend/Assets.php:75
+msgid "Please enter a license plate."
+msgstr ""
+
+#: frontend/AjaxHandler.php:60
+msgid "Please enter a valid email address."
+msgstr ""
+
+#: frontend/AjaxHandler.php:109
+msgid "Please enter a valid license plate."
+msgstr ""
+
+#: frontend/Assets.php:76
+msgid "Please enter the required reference."
+msgstr ""
+
+#: frontend/AjaxHandler.php:121
+msgid "Please enter your %s to look up this vehicle."
+msgstr ""
+
+#: includes/Activator.php:28
+msgid "Plugin activation error"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:77
+msgid "Protect the public search form against bots and plate enumeration."
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:120
+msgid "Publishable Key"
+msgstr ""
+
+#: templates/pdf-receipt.php:48
+msgid "Receipt"
+msgstr ""
+
+#: frontend/AjaxHandler.php:196
+msgid "Receipt file is unavailable."
+msgstr ""
+
+#: frontend/AjaxHandler.php:182 frontend/AjaxHandler.php:190
+msgid "Receipt not found."
+msgstr ""
+
+#: admin/Pages/logs.php:67
+msgid "Recent vehicle searches, for abuse/enumeration detection. IPs are shown for the retained window only."
+msgstr ""
+
+#: frontend/Assets.php:73
+msgid "Redirecting to secure checkout…"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:73
+msgid "Reference field label"
+msgstr ""
+
+#: admin/Pages/logs.php:73
+msgid "Reference?"
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:104
+msgid "Relocated To"
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:128
+msgid "Request Invoice"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:65
+msgid "Request Timeout (seconds)"
+msgstr ""
+
+#: frontend/Assets.php:78
+msgid "Requesting…"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:72
+msgid "Require reference number"
+msgstr ""
+
+#: admin/Pages/logs.php:74
+msgid "Result"
+msgstr ""
+
+#: admin/Pages/logs.php:66
+msgid "Search Audit Log"
+msgstr ""
+
+#: frontend/Assets.php:72 templates/frontend/search-form.php:51
+#: templates/frontend/search-form.php:71
+msgid "Search Vehicle"
+msgstr ""
+
+#: admin/Pages/dashboard.php:66
+msgid "Search shortcode"
+msgstr ""
+
+#: frontend/Assets.php:71
+msgid "Searching…"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:121
+msgid "Secret Key"
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:164
+msgid "Secure payment powered by Stripe. Cards, Apple Pay & Google Pay accepted."
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:137
+msgid "Send invoice to a different email (optional)"
+msgstr ""
+
+#: admin/Pages/dashboard.php:54
+msgid "Setup Checklist"
+msgstr ""
+
+#: frontend/Assets.php:74
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+#: admin/AdminMenu.php:43 admin/AdminMenu.php:44
+msgid "Sperhake Tracker"
+msgstr ""
+
+#: admin/Pages/dashboard.php:21
+msgid "Sperhake Tracker – Dashboard"
+msgstr ""
+
+#: includes/GDPR/PrivacyManager.php:59 includes/GDPR/PrivacyManager.php:74
+msgid "Sperhake Vehicle Tracker"
+msgstr ""
+
+#: includes/Activator.php:27
+msgid "Sperhake Vehicle Tracker requires PHP 8.2 or higher."
+msgstr ""
+
+#: includes/GDPR/PrivacyManager.php:101 templates/emails/receipt.php:51
+#: templates/frontend/payment-success.php:32
+#: templates/frontend/vehicle-result.php:43
+msgid "Status"
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:49
+msgid "Storage Address"
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:48 templates/pdf-receipt.php:64
+msgid "Storage Yard"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:234
+msgid "Stored encrypted. Leave blank to keep the current value."
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:117
+msgid "Stripe Configuration"
+msgstr ""
+
+#: admin/AdminMenu.php:55 admin/AdminMenu.php:96
+msgid "Stripe Settings"
+msgstr ""
+
+#: admin/Pages/dashboard.php:31
+msgid "Stripe is not configured. Visit Stripe Settings to enable payments."
+msgstr ""
+
+#: admin/Pages/dashboard.php:58
+msgid "Stripe mode"
+msgstr ""
+
+#: admin/Pages/dashboard.php:62
+msgid "Stripe webhook endpoint"
+msgstr ""
+
+#: admin/AdminMenu.php:58 admin/Pages/logs.php:28
+msgid "System Logs"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:259
+msgid "Test"
+msgstr ""
+
+#: templates/emails/receipt.php:39
+msgid "Thank you for your payment"
+msgstr ""
+
+#: emails/Mailer.php:103
+msgid "Thank you for your payment."
+msgstr ""
+
+#: admin/Pages/dashboard.php:25
+msgid "The Vehicle Tracking API URL is not configured yet. Visit API Settings to get started."
+msgstr ""
+
+#: api/VehicleApiClient.php:226
+msgid "The invoice could not be requested right now. Please try again later."
+msgstr ""
+
+#: payments/StripeGateway.php:74
+msgid "There is no outstanding penalty to pay for this vehicle."
+msgstr ""
+
+#: templates/emails/receipt.php:70
+msgid "This download link is valid for 24 hours. The receipt is also attached as a PDF."
+msgstr ""
+
+#: templates/pdf-receipt.php:78
+msgid "This is a computer-generated receipt issued by %s. No signature is required."
+msgstr ""
+
+#: payments/StripeGateway.php:79
+msgid "This penalty has already been paid."
+msgstr ""
+
+#: frontend/AjaxHandler.php:174
+msgid "This receipt link has expired. Please contact us to request a new copy."
+msgstr ""
+
+#: admin/Pages/logs.php:42 admin/Pages/logs.php:71
+msgid "Time (UTC)"
+msgstr ""
+
+#: frontend/AjaxHandler.php:100
+msgid "Too many requests. Please wait a moment and try again."
+msgstr ""
+
+#: admin/Pages/dashboard.php:41
+msgid "Total Collected (EUR)"
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:44
+msgid "Towed Date"
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:46
+#: templates/frontend/vehicle-result.php:99
+msgid "Towed From"
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:45
+msgid "Towed Time"
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:47
+msgid "Towing Location"
+msgstr ""
+
+#: includes/GDPR/PrivacyManager.php:93
+msgid "Towing penalty payments"
+msgstr ""
+
+#: payments/StripeGateway.php:139
+msgid "Towing penalty – %s"
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:84
+msgid "Track on Map"
+msgstr ""
+
+#: admin/Pages/transactions.php:73 includes/GDPR/PrivacyManager.php:96
+#: templates/emails/receipt.php:47 templates/frontend/payment-success.php:25
+#: templates/pdf-receipt.php:52
+msgid "Transaction ID"
+msgstr ""
+
+#: admin/AdminMenu.php:57 admin/Pages/transactions.php:43
+msgid "Transaction Logs"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:71
+msgid "Turnstile Secret Key"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:70
+msgid "Turnstile Site Key"
+msgstr ""
+
+#: api/VehicleApiClient.php:90
+msgid "Unexpected response from the vehicle database."
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:35
+msgid "Vehicle Found"
+msgstr ""
+
+#: templates/pdf-receipt.php:55
+msgid "Vehicle ID"
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:57
+msgid "Vehicle Release Instructions"
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:109
+msgid "Vehicle Relocated To"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:58
+msgid "Vehicle Tracking API"
+msgstr ""
+
+#: api/VehicleApiClient.php:42
+msgid "Vehicle lookup is temporarily unavailable. Please contact us."
+msgstr ""
+
+#: frontend/AjaxHandler.php:135
+msgid "Vehicle not found."
+msgstr ""
+
+#: frontend/AjaxHandler.php:91
+msgid "Verification failed. Please complete the challenge and try again."
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:80
+msgid "View Route on Map"
+msgstr ""
+
+#: admin/AdminMenu.php:211
+msgid "View not found."
+msgstr ""
+
+#: admin/Pages/logs.php:22
+msgid "Warning"
+msgstr ""
+
+#: api/VehicleApiClient.php:212
+msgid "We could not reach the invoice service. Please try again shortly."
+msgstr ""
+
+#: api/VehicleApiClient.php:66
+msgid "We could not reach the vehicle database. Please try again shortly."
+msgstr ""
+
+#: templates/emails/receipt.php:41
+msgid "We have received your penalty payment. A copy of your receipt is attached to this email for your records."
+msgstr ""
+
+#: templates/frontend/payment-success.php:41
+msgid "We have received your request and will confirm shortly. You will receive an email once the payment is complete."
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:122
+msgid "Webhook Signing Secret"
+msgstr ""
+
+#: includes/GDPR/PrivacyManager.php:42
+msgid "When you search for a towed vehicle or pay an outstanding penalty, Abschleppdienst Sperhake processes your license plate, name, email address and payment details. Payment card data is handled exclusively by Stripe and is never stored on our servers. Transaction records are retained for the period configured by the operator and are then automatically deleted."
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:64
+msgid "Where completed payments are posted after success."
+msgstr ""
+
+#: admin/Pages/logs.php:86
+msgid "Yes"
+msgstr ""
+
+#: admin/AdminMenu.php:199
+msgid "You do not have permission to access this page."
+msgstr ""
+
+#: templates/frontend/search-form.php:78
+msgid "Your %s is printed on the notice left on or near your vehicle."
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:125
+msgid "Your Webhook Endpoint"
+msgstr ""
+
+#: emails/Mailer.php:45 includes/Activator.php:67
+msgid "Your payment receipt – Abschleppdienst Sperhake"
+msgstr ""
+
+#: templates/frontend/payment-success.php:37
+msgid "Your receipt is being generated and has been emailed to you."
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:73
+msgid "e.g. \"Case Number\" or \"Reference Number\". Sent to the API as \"reference\"."
+msgstr ""
+
