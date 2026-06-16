@@ -69,13 +69,17 @@ $row = static function ( string $label, string $value ): void {
 		$dest_lng = (string) ( $vehicle['destination_lng'] ?? '' );
 
 		// Origin = where the vehicle was towed from; destination = where it now sits.
-		$origin_addr = trim( (string) ( $vehicle['pickup_address'] ?? '' ) );
-		$dest_point  = ( '' !== $dest_lat && '' !== $dest_lng ) ? $dest_lat . ',' . $dest_lng : $dest;
+		// Prefer exact coordinates for each endpoint, falling back to the address.
+		$origin_addr  = trim( (string) ( $vehicle['pickup_address'] ?? '' ) );
+		$origin_lat   = (string) ( $vehicle['origin_lat'] ?? '' );
+		$origin_lng   = (string) ( $vehicle['origin_lng'] ?? '' );
+		$origin_point = ( '' !== $origin_lat && '' !== $origin_lng ) ? $origin_lat . ',' . $origin_lng : $origin_addr;
+		$dest_point   = ( '' !== $dest_lat && '' !== $dest_lng ) ? $dest_lat . ',' . $dest_lng : $dest;
 
-		if ( '' !== $dest_point && '' !== $origin_addr ) {
+		if ( '' !== $dest_point && '' !== $origin_point ) {
 			// Plot both pins and the driving route between them.
 			$map_url   = 'https://www.google.com/maps/dir/?api=1'
-				. '&origin=' . rawurlencode( $origin_addr )
+				. '&origin=' . rawurlencode( $origin_point )
 				. '&destination=' . rawurlencode( $dest_point );
 			$map_label = __( 'View Route on Map', 'sperhake-tracker' );
 		} elseif ( '' !== $dest_point ) {
@@ -94,17 +98,19 @@ $row = static function ( string $label, string $value ): void {
 		<?php if ( '' !== $dest ) : ?>
 			<div class="sperhake-vehicle__destination">
 				<?php if ( '' !== $origin_addr ) : ?>
-					<div class="sperhake-route">
-						<div class="sperhake-route__leg">
+					<h4 class="sperhake-route__title"><?php esc_html_e( 'Relocation Route', 'sperhake-tracker' ); ?></h4>
+					<ol class="sperhake-route">
+						<li class="sperhake-route__leg sperhake-route__leg--from">
+							<span class="sperhake-route__dot" aria-hidden="true"></span>
 							<span class="sperhake-route__label"><?php esc_html_e( 'Towed From', 'sperhake-tracker' ); ?></span>
 							<span class="sperhake-route__address"><?php echo esc_html( $origin_addr ); ?></span>
-						</div>
-						<div class="sperhake-route__arrow" aria-hidden="true">→</div>
-						<div class="sperhake-route__leg">
+						</li>
+						<li class="sperhake-route__leg sperhake-route__leg--to">
+							<span class="sperhake-route__dot" aria-hidden="true"></span>
 							<span class="sperhake-route__label"><?php esc_html_e( 'Relocated To', 'sperhake-tracker' ); ?></span>
 							<span class="sperhake-route__address"><?php echo esc_html( $dest ); ?></span>
-						</div>
-					</div>
+						</li>
+					</ol>
 				<?php else : ?>
 					<h4><?php esc_html_e( 'Vehicle Relocated To', 'sperhake-tracker' ); ?></h4>
 					<p class="sperhake-destination__address"><?php echo esc_html( $dest ); ?></p>
@@ -115,6 +121,10 @@ $row = static function ( string $label, string $value ): void {
 		<div class="sperhake-destination__actions">
 			<?php if ( '' !== $map_url ) : ?>
 				<a class="sperhake-btn sperhake-btn--map" href="<?php echo esc_url( $map_url ); ?>" target="_blank" rel="noopener noreferrer">
+					<svg class="sperhake-btn__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+						<path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+						<circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="2"/>
+					</svg>
 					<?php echo esc_html( $map_label ); ?>
 				</a>
 			<?php endif; ?>

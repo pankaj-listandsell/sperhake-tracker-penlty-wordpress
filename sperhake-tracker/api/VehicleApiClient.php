@@ -137,6 +137,10 @@ final class VehicleApiClient {
 		$towed_date    = (string) ( $v['towed_date'] ?? ( '' !== $relocation_at ? substr( $relocation_at, 0, 10 ) : '' ) );
 		$towed_time    = (string) ( $v['towed_time'] ?? ( strlen( $relocation_at ) >= 16 ? substr( $relocation_at, 11, 5 ) : '' ) );
 
+		// Origin ("address_a") is where the vehicle was towed from. Some
+		// deployments still send the legacy "pickup_address" field — support both.
+		$pickup_address = (string) ( $v['address_a'] ?? $v['pickup_address'] ?? '' );
+
 		return [
 			'license_plate'        => (string) ( $v['plate'] ?? $v['license_plate'] ?? $plate ),
 			'owner_name'           => isset( $v['owner_name'] ) ? (string) $v['owner_name'] : '',
@@ -144,7 +148,9 @@ final class VehicleApiClient {
 			'status'               => (string) ( $v['status_for_display'] ?? $v['status'] ?? 'unknown' ),
 			'towed_date'           => $towed_date,
 			'towed_time'           => $towed_time,
-			'pickup_address'       => (string) ( $v['pickup_address'] ?? '' ),
+			'pickup_address'       => $pickup_address,
+			'origin_lat'           => isset( $v['address_a_lat'] ) && null !== $v['address_a_lat'] ? (string) $v['address_a_lat'] : '',
+			'origin_lng'           => isset( $v['address_a_lng'] ) && null !== $v['address_a_lng'] ? (string) $v['address_a_lng'] : '',
 			'towing_location'      => (string) ( $v['towing_location'] ?? '' ),
 			'storage_yard_name'    => (string) ( $v['storage_yard_name'] ?? '' ),
 			'storage_yard_address' => (string) ( $v['storage_yard_address'] ?? '' ),

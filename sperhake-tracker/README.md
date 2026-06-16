@@ -173,6 +173,13 @@ Expected response fields (all optional except status): `license_plate`,
 `storage_yard_address`, `current_location`, `contact_number`,
 `release_instructions`, `penalty_amount`, `currency`.
 
+Route map fields — the "from" and "to" endpoints used to draw the
+relocation route: `address_a` (origin, falls back to `pickup_address`)
+with optional `address_a_lat`/`address_a_lng`, and `address_b`
+(destination, populated once paid) with optional
+`address_b_lat`/`address_b_lng`. Coordinates are preferred over the
+plain address for an exact route.
+
 **Payment completed** — `POST {webhook_url}`
 
 ```json
