@@ -1,8 +1,8 @@
 /* Sperhake Vehicle Tracker — frontend styles */
 
 .sperhake-widget {
-	--sperhake-primary: #0f2a4a;
-	--sperhake-accent: #1d6fe0;
+	--sperhake-primary: #3a312a;
+	--sperhake-accent: #f9b022;
 	--sperhake-radius: 18px;
 	position: relative;
 	max-width: 720px;
@@ -11,7 +11,7 @@
 	background: #fff;
 	border: 1px solid #e6e9ee;
 	border-radius: var(--sperhake-radius);
-	box-shadow: 0 20px 50px -12px rgba(15, 42, 74, 0.18), 0 4px 12px rgba(15, 42, 74, 0.04);
+	box-shadow: 0 20px 50px -12px rgba(58, 49, 42, 0.18), 0 4px 12px rgba(58, 49, 42, 0.04);
 	box-sizing: border-box;
 	font-family: inherit;
 	color: #1f2937;
@@ -26,7 +26,7 @@
 	left: 0;
 	right: 0;
 	height: 5px;
-	background: linear-gradient(90deg, var(--sperhake-accent) 0%, #155bbd 100%);
+	background: linear-gradient(90deg, var(--sperhake-accent) 0%, #ff703c 100%);
 }
 
 .sperhake-widget *,
@@ -57,23 +57,26 @@
 
 .sperhake-search__input {
 	flex: 1 1 220px;
-	padding: 16px 18px;
-	font-size: 1.1rem;
-	font-weight: 600;
-	letter-spacing: 0.08em;
+	padding: 16px 18px 16px 26px;
+	font-size: 1.25rem;
+	font-weight: 800;
+	letter-spacing: 0.14em;
 	text-transform: uppercase;
+	text-align: center;
 	color: var(--sperhake-primary);
-	background: #f8fafc;
-	border: 2px solid #e2e8f0;
-	border-radius: 12px;
-	transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+	background: #fff;
+	border: 2px solid #d8dde5;
+	border-radius: 10px;
+	/* Left accent bar evokes a number-plate strip; inset so focus doesn't shift layout. */
+	box-shadow: inset 6px 0 0 var(--sperhake-accent), inset 0 1px 2px rgba(0, 0, 0, 0.05);
+	transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
 }
-.sperhake-search__input::placeholder { color: #aab2c0; font-weight: 500; letter-spacing: 0.06em; }
+.sperhake-search__input::placeholder { color: #b9c0cb; font-weight: 600; letter-spacing: 0.1em; }
 .sperhake-search__input:focus {
 	outline: none;
-	background: #fff;
 	border-color: var(--sperhake-accent);
-	box-shadow: 0 0 0 4px rgba(29, 111, 224, 0.12);
+	box-shadow: inset 6px 0 0 var(--sperhake-accent), 0 0 0 4px rgba(249, 176, 34, 0.22);
+	transform: translateY(-1px);
 }
 
 .sperhake-btn {
@@ -94,11 +97,11 @@
 .sperhake-btn:disabled { opacity: 0.6; cursor: progress; }
 
 .sperhake-btn--primary {
-	background: var(--sperhake-accent, #1d6fe0);
-	color: #fff;
-	box-shadow: 0 6px 16px -4px rgba(29, 111, 224, 0.5);
+	background: var(--sperhake-accent, #f9b022);
+	color: #3a312a;
+	box-shadow: 0 6px 16px -4px rgba(249, 176, 34, 0.5);
 }
-.sperhake-btn--primary:hover { background: #155bbd; box-shadow: 0 8px 20px -4px rgba(29, 111, 224, 0.55); }
+.sperhake-btn--primary:hover { background: #e89a10; box-shadow: 0 8px 20px -4px rgba(249, 176, 34, 0.55); }
 .sperhake-btn--pay { background: #16a34a; color: #fff; width: 100%; font-size: 1.1rem; padding: 16px; }
 .sperhake-btn--pay:hover { background: #128a3e; }
 
@@ -171,8 +174,8 @@
 /* Relocation destination (paid cases) */
 .sperhake-vehicle__destination {
 	padding: 20px;
-	background: linear-gradient(180deg, #f5f9ff 0%, #eef5ff 100%);
-	border-top: 1px solid #dbe7fb;
+	background: linear-gradient(180deg, #fffaf0 0%, #fff4dd 100%);
+	border-top: 1px solid #fbe3b3;
 }
 .sperhake-vehicle__destination h4,
 .sperhake-route__title {
@@ -186,7 +189,7 @@
 	margin: 0;
 	font-size: 1.05rem;
 	font-weight: 600;
-	color: var(--sperhake-primary, #0f2a4a);
+	color: var(--sperhake-primary, #3a312a);
 }
 
 /* Route shown as a vertical "journey" timeline with map-pin markers */
@@ -211,7 +214,7 @@
 	top: 18px;
 	bottom: -4px;
 	width: 2px;
-	background: repeating-linear-gradient(180deg, #9bb8e6 0 5px, transparent 5px 10px);
+	background: repeating-linear-gradient(180deg, #e8c074 0 5px, transparent 5px 10px);
 }
 .sperhake-route__dot {
 	position: absolute;
@@ -237,7 +240,7 @@
 .sperhake-route__address {
 	font-size: 1.02rem;
 	font-weight: 600;
-	color: var(--sperhake-primary, #0f2a4a);
+	color: var(--sperhake-primary, #3a312a);
 	line-height: 1.4;
 }
 
@@ -251,13 +254,13 @@
 .sperhake-btn__icon { flex: none; }
 
 .sperhake-btn--map {
-	background: var(--sperhake-primary, #0f2a4a);
+	background: var(--sperhake-primary, #3a312a);
 	color: #fff;
-	box-shadow: 0 6px 16px -6px rgba(15, 42, 74, 0.5);
+	box-shadow: 0 6px 16px -6px rgba(58, 49, 42, 0.5);
 }
-.sperhake-btn--map:hover { background: #0b1f37; box-shadow: 0 8px 20px -6px rgba(15, 42, 74, 0.55); }
-.sperhake-btn--invoice { background: #eef2f7; color: var(--sperhake-primary, #0f2a4a); border: 1px solid #d7dde6; }
-.sperhake-btn--invoice:hover { background: #e2e8f0; }
+.sperhake-btn--map:hover { background: #2a231e; box-shadow: 0 8px 20px -6px rgba(58, 49, 42, 0.55); }
+.sperhake-btn--invoice { background: #f6f2ec; color: var(--sperhake-primary, #3a312a); border: 1px solid #e3dccf; }
+.sperhake-btn--invoice:hover { background: #ece5da; }
 
 /* Invoice request */
 .sperhake-invoice { padding: 10px 20px 20px; }
@@ -271,8 +274,8 @@
 }
 .sperhake-invoice__email:focus {
 	outline: none;
-	border-color: var(--sperhake-accent, #1d6fe0);
-	box-shadow: 0 0 0 3px rgba(29, 111, 224, 0.15);
+	border-color: var(--sperhake-accent, #f9b022);
+	box-shadow: 0 0 0 3px rgba(249, 176, 34, 0.22);
 }
 .sperhake-invoice__msg {
 	margin: 10px 0 0;
@@ -302,8 +305,8 @@
 .sperhake-success {
 	/* Theme tokens are scoped to .sperhake-widget; the success panel renders as
 	   its own sibling, so redeclare them here to keep button colours visible. */
-	--sperhake-primary: #0f2a4a;
-	--sperhake-accent: #1d6fe0;
+	--sperhake-primary: #3a312a;
+	--sperhake-accent: #f9b022;
 	--sperhake-radius: 18px;
 	position: relative;
 	max-width: 720px;
@@ -313,7 +316,7 @@
 	background: #fff;
 	border: 1px solid #e6e9ee;
 	border-radius: var(--sperhake-radius);
-	box-shadow: 0 20px 50px -12px rgba(15, 42, 74, 0.18), 0 4px 12px rgba(15, 42, 74, 0.04);
+	box-shadow: 0 20px 50px -12px rgba(58, 49, 42, 0.18), 0 4px 12px rgba(58, 49, 42, 0.04);
 	box-sizing: border-box;
 	overflow: hidden;
 }
@@ -338,7 +341,7 @@
 	font-size: 1.9rem;
 	font-weight: 800;
 	letter-spacing: -0.01em;
-	color: var(--sperhake-primary, #0f2a4a);
+	color: var(--sperhake-primary, #3a312a);
 }
 .sperhake-success__details {
 	text-align: left;
@@ -361,8 +364,8 @@
 /* Post-payment vehicle card auto-rendered above the search form: it lives
    outside .sperhake-widget, so it needs its own copy of the theme tokens. */
 .sperhake-results--post-payment {
-	--sperhake-primary: #0f2a4a;
-	--sperhake-accent: #1d6fe0;
+	--sperhake-primary: #3a312a;
+	--sperhake-accent: #f9b022;
 	max-width: 720px;
 	margin: 0 auto 24px;
 }
