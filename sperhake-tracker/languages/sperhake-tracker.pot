@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sperhake Vehicle Tracking & Penalty Payment 1.3.0\n"
 "Report-Msgid-Bugs-To: https://abschleppdienst-sperhake.de/\n"
-"POT-Creation-Date: 2026-06-12 12:10+0000\n"
+"POT-Creation-Date: 2026-06-24 11:19+0000\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -87,10 +87,6 @@ msgstr ""
 
 #: admin/Pages/logs.php:44
 msgid "Channel"
-msgstr ""
-
-#: admin/Settings/SettingsRegistry.php:70
-msgid "Cloudflare Turnstile site key. Leave blank to disable the CAPTCHA."
 msgstr ""
 
 #: templates/frontend/vehicle-result.php:51
@@ -227,6 +223,10 @@ msgstr ""
 msgid "Frontend Search Security"
 msgstr ""
 
+#: admin/Settings/SettingsRegistry.php:70
+msgid "Google reCAPTCHA v2 (\"I'm not a robot\") site key. Leave blank to disable the CAPTCHA."
+msgstr ""
+
 #: admin/Pages/logs.php:75
 msgid "IP Address"
 msgstr ""
@@ -251,7 +251,7 @@ msgstr ""
 msgid "Invoice requested."
 msgstr ""
 
-#: api/VehicleApiClient.php:232
+#: api/VehicleApiClient.php:238
 msgid "Invoice requested. It will be emailed to you shortly."
 msgstr ""
 
@@ -259,7 +259,7 @@ msgstr ""
 msgid "Invoice requested. Please check your email."
 msgstr ""
 
-#: api/VehicleApiClient.php:180
+#: api/VehicleApiClient.php:186
 msgid "Invoice requests are temporarily unavailable. Please contact us."
 msgstr ""
 
@@ -302,7 +302,7 @@ msgstr ""
 msgid "Mode"
 msgstr ""
 
-#: templates/frontend/vehicle-result.php:167
+#: templates/frontend/vehicle-result.php:177
 msgid "No Outstanding Penalties"
 msgstr ""
 
@@ -334,7 +334,7 @@ msgstr ""
 msgid "One per line, e.g. X-Tenant: sperhake"
 msgstr ""
 
-#: templates/frontend/vehicle-result.php:145
+#: templates/frontend/vehicle-result.php:155
 msgid "Outstanding Penalty"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgstr ""
 msgid "Paid"
 msgstr ""
 
-#: templates/frontend/vehicle-result.php:159
+#: templates/frontend/vehicle-result.php:169
 msgid "Pay Now – %s"
 msgstr ""
 
@@ -383,7 +383,7 @@ msgstr ""
 msgid "Payments are temporarily unavailable."
 msgstr ""
 
-#: templates/frontend/vehicle-result.php:91
+#: templates/frontend/vehicle-result.php:95
 msgid "Penalty Paid"
 msgstr ""
 
@@ -459,11 +459,15 @@ msgstr ""
 msgid "Reference?"
 msgstr ""
 
-#: templates/frontend/vehicle-result.php:104
+#: templates/frontend/vehicle-result.php:110
 msgid "Relocated To"
 msgstr ""
 
-#: templates/frontend/vehicle-result.php:128
+#: templates/frontend/vehicle-result.php:101
+msgid "Relocation Route"
+msgstr ""
+
+#: templates/frontend/vehicle-result.php:138
 msgid "Request Invoice"
 msgstr ""
 
@@ -504,11 +508,11 @@ msgstr ""
 msgid "Secret Key"
 msgstr ""
 
-#: templates/frontend/vehicle-result.php:164
+#: templates/frontend/vehicle-result.php:174
 msgid "Secure payment powered by Stripe. Cards, Apple Pay & Google Pay accepted."
 msgstr ""
 
-#: templates/frontend/vehicle-result.php:137
+#: templates/frontend/vehicle-result.php:147
 msgid "Send invoice to a different email (optional)"
 msgstr ""
 
@@ -594,7 +598,7 @@ msgstr ""
 msgid "The Vehicle Tracking API URL is not configured yet. Visit API Settings to get started."
 msgstr ""
 
-#: api/VehicleApiClient.php:226
+#: api/VehicleApiClient.php:232
 msgid "The invoice could not be requested right now. Please try again later."
 msgstr ""
 
@@ -635,7 +639,7 @@ msgid "Towed Date"
 msgstr ""
 
 #: templates/frontend/vehicle-result.php:46
-#: templates/frontend/vehicle-result.php:99
+#: templates/frontend/vehicle-result.php:105
 msgid "Towed From"
 msgstr ""
 
@@ -655,7 +659,7 @@ msgstr ""
 msgid "Towing penalty – %s"
 msgstr ""
 
-#: templates/frontend/vehicle-result.php:84
+#: templates/frontend/vehicle-result.php:88
 msgid "Track on Map"
 msgstr ""
 
@@ -667,14 +671,6 @@ msgstr ""
 
 #: admin/AdminMenu.php:57 admin/Pages/transactions.php:43
 msgid "Transaction Logs"
-msgstr ""
-
-#: admin/Settings/SettingsRegistry.php:71
-msgid "Turnstile Secret Key"
-msgstr ""
-
-#: admin/Settings/SettingsRegistry.php:70
-msgid "Turnstile Site Key"
 msgstr ""
 
 #: api/VehicleApiClient.php:90
@@ -693,7 +689,7 @@ msgstr ""
 msgid "Vehicle Release Instructions"
 msgstr ""
 
-#: templates/frontend/vehicle-result.php:109
+#: templates/frontend/vehicle-result.php:115
 msgid "Vehicle Relocated To"
 msgstr ""
 
@@ -713,7 +709,7 @@ msgstr ""
 msgid "Verification failed. Please complete the challenge and try again."
 msgstr ""
 
-#: templates/frontend/vehicle-result.php:80
+#: templates/frontend/vehicle-result.php:84
 msgid "View Route on Map"
 msgstr ""
 
@@ -725,7 +721,7 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#: api/VehicleApiClient.php:212
+#: api/VehicleApiClient.php:218
 msgid "We could not reach the invoice service. Please try again shortly."
 msgstr ""
 
@@ -779,5 +775,13 @@ msgstr ""
 
 #: admin/Settings/SettingsRegistry.php:73
 msgid "e.g. \"Case Number\" or \"Reference Number\". Sent to the API as \"reference\"."
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:71
+msgid "reCAPTCHA Secret Key"
+msgstr ""
+
+#: admin/Settings/SettingsRegistry.php:70
+msgid "reCAPTCHA Site Key"
 msgstr ""
 

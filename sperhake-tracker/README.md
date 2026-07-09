@@ -50,8 +50,9 @@ On activation the plugin:
    requests with an HMAC-SHA256 `X-Signature` header), custom headers, the
    forward webhook URL, and timeout. Keys are stored **encrypted**. This page also
    has a **Frontend Search Security** section:
-   * **Cloudflare Turnstile** – paste your Site Key + Secret Key to switch on the
-     CAPTCHA. Leave blank to disable. (Get keys at Cloudflare → Turnstile.)
+   * **Google reCAPTCHA v2** – paste your Site Key + Secret Key to switch on the
+     "I'm not a robot" CAPTCHA. Leave blank to disable. (Get keys at
+     https://www.google.com/recaptcha/admin → register a **reCAPTCHA v2 "I'm not a robot"** site.)
    * **Require reference number** – forces a second identifier (e.g. *Case Number*)
      alongside the plate so visitors can't enumerate arbitrary plates. The field
      label is configurable and the value is sent to your API as `reference`; the
@@ -98,7 +99,7 @@ sperhake-tracker/
 │   ├── Database/TransactionRepository.php   # All prepared-statement DB access
 │   ├── Database/SearchLogRepository.php      # Search audit log (abuse detection)
 │   ├── Security/Encryption.php # sodium/openssl secret encryption
-│   ├── Security/Turnstile.php  # Cloudflare Turnstile server verification
+│   ├── Security/Recaptcha.php  # Google reCAPTCHA v2 server verification
 │   ├── Logging/Logger.php      # DB-backed logger with secret redaction
 │   ├── Support/Options.php     # Typed settings accessor (auto-decrypts)
 │   ├── Support/Plate.php       # Plate normalisation/validation
@@ -133,7 +134,7 @@ sperhake-tracker/
   paid *less* than the current penalty (e.g. the fine was raised after checkout
   opened), the transaction is marked `paid` but flagged `review`, auto-forwarding
   to the external API is suppressed, and `sperhake_payment_amount_mismatch` fires.
-* **Bot protection** via Cloudflare Turnstile, verified server-side before any API
+* **Bot protection** via Google reCAPTCHA v2, verified server-side before any API
   call (fails open only on a Cloudflare transport outage, which is logged).
 * **Anti-enumeration**: optional required reference number gates every lookup.
 * **Duplicate-payment prevention**: before creating a Checkout Session the gateway

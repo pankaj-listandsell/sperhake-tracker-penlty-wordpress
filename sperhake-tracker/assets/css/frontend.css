@@ -106,7 +106,7 @@
 .sperhake-btn--pay:hover { background: #128a3e; }
 
 .sperhake-search__hint { margin: 8px 0 0; font-size: 0.82rem; color: #6b7280; }
-.sperhake-turnstile { margin-top: 16px; }
+.sperhake-recaptcha { margin-top: 16px; }
 
 .sperhake-search__error {
 	margin: 12px 0 0;

@@ -56,9 +56,6 @@ msgstr "Fallnummer"
 msgid "Channel"
 msgstr "Kanal"
 
-msgid "Cloudflare Turnstile site key. Leave blank to disable the CAPTCHA."
-msgstr "Cloudflare-Turnstile-Site-Key. Leer lassen, um das CAPTCHA zu deaktivieren."
-
 msgid "Contact"
 msgstr "Kontakt"
 
@@ -157,6 +154,9 @@ msgstr "Absendername"
 
 msgid "Frontend Search Security"
 msgstr "Sicherheit der Frontend-Suche"
+
+msgid "Google reCAPTCHA v2 (\"I'm not a robot\") site key. Leave blank to disable the CAPTCHA."
+msgstr "Google-reCAPTCHA-v2-Site-Key („Ich bin kein Roboter“). Leer lassen, um das CAPTCHA zu deaktivieren."
 
 msgid "IP Address"
 msgstr "IP-Adresse"
@@ -482,12 +482,6 @@ msgstr "Transaktions-ID"
 msgid "Transaction Logs"
 msgstr "Transaktionsprotokolle"
 
-msgid "Turnstile Secret Key"
-msgstr "Turnstile-Secret-Key"
-
-msgid "Turnstile Site Key"
-msgstr "Turnstile-Site-Key"
-
 msgid "Unexpected response from the vehicle database."
 msgstr "Unerwartete Antwort von der Fahrzeugdatenbank."
 
@@ -562,4 +556,10 @@ msgstr "Ihr Beleg wird erstellt und wurde Ihnen per E-Mail zugesandt."
 
 msgid "e.g. \"Case Number\" or \"Reference Number\". Sent to the API as \"reference\"."
 msgstr "z. B. „Fallnummer“ oder „Referenznummer“. Wird als „reference“ an die API gesendet."
+
+msgid "reCAPTCHA Secret Key"
+msgstr "reCAPTCHA-Secret-Key"
+
+msgid "reCAPTCHA Site Key"
+msgstr "reCAPTCHA-Site-Key"
 

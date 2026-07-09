@@ -1,6 +1,6 @@
 <?php
 /**
- * Cloudflare Turnstile server-side verification.
+ * Google reCAPTCHA v2 ("I'm not a robot") server-side verification.
  *
  * @package SperhakeTracker
  */
@@ -17,9 +17,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-final class Turnstile {
+final class Recaptcha {
 
-	private const VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+	private const VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify';
 
 	public function __construct(
 		private readonly Options $options,
@@ -27,16 +27,16 @@ final class Turnstile {
 	) {}
 
 	/**
-	 * Whether Turnstile is fully configured (and therefore enforced).
+	 * Whether reCAPTCHA is fully configured (and therefore enforced).
 	 */
 	public function is_enabled(): bool {
-		return '' !== $this->options->turnstile_site_key()
-			&& '' !== $this->options->turnstile_secret();
+		return '' !== $this->options->recaptcha_site_key()
+			&& '' !== $this->options->recaptcha_secret();
 	}
 
 	/**
-	 * Verify a Turnstile token. Returns true when verification passes OR when
-	 * Turnstile is not enabled (so the feature degrades gracefully).
+	 * Verify a reCAPTCHA token. Returns true when verification passes OR when
+	 * reCAPTCHA is not enabled (so the feature degrades gracefully).
 	 */
 	public function verify( string $token, string $ip = '' ): bool {
 		if ( ! $this->is_enabled() ) {
@@ -52,7 +52,7 @@ final class Turnstile {
 			[
 				'timeout' => 10,
 				'body'    => [
-					'secret'   => $this->options->turnstile_secret(),
+					'secret'   => $this->options->recaptcha_secret(),
 					'response' => $token,
 					'remoteip' => $ip,
 				],
@@ -60,9 +60,9 @@ final class Turnstile {
 		);
 
 		if ( $response instanceof WP_Error ) {
-			// Fail OPEN on transport errors so a Cloudflare outage doesn't block
+			// Fail OPEN on transport errors so a Google outage doesn't block
 			// all customers, but record it for monitoring.
-			$this->logger->warning( 'turnstile', 'Verification request failed; allowing through.', [ 'error' => $response->get_error_message() ] );
+			$this->logger->warning( 'recaptcha', 'Verification request failed; allowing through.', [ 'error' => $response->get_error_message() ] );
 
 			return true;
 		}
@@ -72,8 +72,8 @@ final class Turnstile {
 
 		if ( ! $ok ) {
 			$this->logger->info(
-				'turnstile',
-				'Turnstile challenge rejected.',
+				'recaptcha',
+				'reCAPTCHA challenge rejected.',
 				[ 'errors' => is_array( $body ) ? ( $body['error-codes'] ?? [] ) : [] ]
 			);
 		}

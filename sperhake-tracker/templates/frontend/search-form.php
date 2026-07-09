@@ -4,8 +4,8 @@
  *
  * @package SperhakeTracker
  * @var array<string, mixed> $atts               Shortcode attributes (provides $atts['title']).
- * @var bool                 $turnstile_enabled  Whether the CAPTCHA is active.
- * @var string               $turnstile_site_key Turnstile site key.
+ * @var bool                 $recaptcha_enabled  Whether the CAPTCHA is active.
+ * @var string               $recaptcha_site_key reCAPTCHA site key.
  * @var bool                 $require_reference  Whether the reference field is required.
  * @var string               $reference_label    Label for the reference field.
  */
@@ -17,8 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $title              = isset( $atts['title'] ) ? (string) $atts['title'] : __( 'Find Your Vehicle', 'sperhake-tracker' );
-$turnstile_enabled  = ! empty( $turnstile_enabled );
-$turnstile_site_key = isset( $turnstile_site_key ) ? (string) $turnstile_site_key : '';
+$recaptcha_enabled  = ! empty( $recaptcha_enabled );
+$recaptcha_site_key = isset( $recaptcha_site_key ) ? (string) $recaptcha_site_key : '';
 $require_reference  = ! empty( $require_reference );
 $reference_label    = isset( $reference_label ) ? (string) $reference_label : __( 'Case Number', 'sperhake-tracker' );
 ?>
@@ -82,11 +82,10 @@ $reference_label    = isset( $reference_label ) ? (string) $reference_label : __
 			</p>
 		<?php endif; ?>
 
-		<?php if ( $turnstile_enabled ) : ?>
+		<?php if ( $recaptcha_enabled ) : ?>
 			<div
-				class="cf-turnstile sperhake-turnstile"
-				data-sitekey="<?php echo esc_attr( $turnstile_site_key ); ?>"
-				data-action="vehicle_search"
+				class="g-recaptcha sperhake-recaptcha"
+				data-sitekey="<?php echo esc_attr( $recaptcha_site_key ); ?>"
 			></div>
 		<?php endif; ?>
 

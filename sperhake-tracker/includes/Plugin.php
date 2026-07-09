@@ -27,7 +27,7 @@ use SperhakeTracker\Payments\StripeGateway;
 use SperhakeTracker\Payments\WebhookController;
 use SperhakeTracker\Pdf\ReceiptGenerator;
 use SperhakeTracker\Security\Encryption;
-use SperhakeTracker\Security\Turnstile;
+use SperhakeTracker\Security\Recaptcha;
 use SperhakeTracker\Support\Options;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -155,7 +155,7 @@ final class Plugin {
 		$this->set( 'options', $options );
 		$this->set( 'transactions', $repository );
 		$this->set( 'search_logs', $searchLogs );
-		$this->set( 'turnstile', new Turnstile( $options, $logger ) );
+		$this->set( 'recaptcha', new Recaptcha( $options, $logger ) );
 
 		$this->set( 'vehicle_api', new VehicleApiClient( $options, $logger ) );
 		$this->set( 'external_api', new ExternalApiClient( $options, $logger ) );
@@ -187,7 +187,7 @@ final class Plugin {
 			$this->get( 'vehicle_api' ),
 			$this->get( 'options' ),
 			$this->get( 'logger' ),
-			$this->get( 'turnstile' ),
+			$this->get( 'recaptcha' ),
 			$this->get( 'search_logs' )
 		);
 

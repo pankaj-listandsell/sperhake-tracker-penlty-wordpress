@@ -24,7 +24,7 @@ final class Options {
 
 	/** Keys that are stored encrypted and must be decrypted on read. */
 	private const ENCRYPTED_KEYS = [
-		self::API    => [ 'api_key', 'api_secret', 'turnstile_secret' ],
+		self::API    => [ 'api_key', 'api_secret', 'recaptcha_secret' ],
 		self::STRIPE => [ 'secret_key', 'webhook_secret' ],
 	];
 
@@ -131,15 +131,15 @@ final class Options {
 	}
 
 	/* ------------------------------------------------------------------
-	 * Frontend security (Turnstile + reference) — stored in the API group
+	 * Frontend security (reCAPTCHA + reference) — stored in the API group
 	 * --------------------------------------------------------------- */
 
-	public function turnstile_site_key(): string {
-		return (string) $this->get( self::API, 'turnstile_site_key', '' );
+	public function recaptcha_site_key(): string {
+		return (string) $this->get( self::API, 'recaptcha_site_key', '' );
 	}
 
-	public function turnstile_secret(): string {
-		return (string) $this->get( self::API, 'turnstile_secret', '' );
+	public function recaptcha_secret(): string {
+		return (string) $this->get( self::API, 'recaptcha_secret', '' );
 	}
 
 	public function require_reference(): bool {

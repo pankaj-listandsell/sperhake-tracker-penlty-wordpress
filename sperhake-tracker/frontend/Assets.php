@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 final class Assets {
 
 	public const HANDLE    = 'sperhake-tracker';
-	public const TURNSTILE = 'sperhake-turnstile';
+	public const RECAPTCHA = 'sperhake-recaptcha';
 
 	public function __construct( private readonly Options $options ) {}
 
@@ -38,12 +38,14 @@ final class Assets {
 			SPERHAKE_TRACKER_VERSION
 		);
 
-		// Cloudflare Turnstile (explicit render API).
+		// Google reCAPTCHA v2 (implicit render: scans for .g-recaptcha on load).
+		// hl forces the widget language; default to the site locale (e.g. "de").
+		$recaptcha_lang = $this->recaptcha_language();
 		wp_register_script(
-			self::TURNSTILE,
-			'https://challenges.cloudflare.com/turnstile/v0/api.js',
+			self::RECAPTCHA,
+			add_query_arg( 'hl', $recaptcha_lang, 'https://www.google.com/recaptcha/api.js' ),
 			[],
-			null, // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- external, versioned by Cloudflare.
+			null, // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- external, versioned by Google.
 			true
 		);
 
@@ -55,7 +57,7 @@ final class Assets {
 			true
 		);
 
-		$site_key = $this->options->turnstile_site_key();
+		$site_key = $this->options->recaptcha_site_key();
 
 		wp_localize_script(
 			self::HANDLE,
@@ -64,8 +66,8 @@ final class Assets {
 				'ajaxUrl'           => admin_url( 'admin-ajax.php' ),
 				'nonce'             => wp_create_nonce( 'sperhake_search' ),
 				'payNonce'          => wp_create_nonce( 'sperhake_pay' ),
-				'turnstileSiteKey'  => $site_key,
-				'turnstileEnabled'  => '' !== $site_key && '' !== $this->options->turnstile_secret(),
+				'recaptchaSiteKey'  => $site_key,
+				'recaptchaEnabled'  => '' !== $site_key && '' !== $this->options->recaptcha_secret(),
 				'requireReference'  => $this->options->require_reference(),
 				'i18n'              => [
 					'searching'   => __( 'Searching…', 'sperhake-tracker' ),
@@ -80,5 +82,27 @@ final class Assets {
 				],
 			]
 		);
+	}
+
+	/**
+	 * reCAPTCHA widget language code derived from the site locale.
+	 *
+	 * WordPress locales look like "de_DE"; reCAPTCHA expects "de" (with a few
+	 * region-specific exceptions it handles itself, e.g. "pt-BR", "zh-CN").
+	 * Filterable via "sperhake_recaptcha_language" for manual overrides.
+	 */
+	private function recaptcha_language(): string {
+		$locale = (string) get_locale();              // e.g. "de_DE".
+		$lang   = strtolower( str_replace( '_', '-', $locale ) );
+
+		// A handful of reCAPTCHA codes keep their region suffix; everything else
+		// uses the base language subtag.
+		$regional = [ 'zh-cn', 'zh-tw', 'zh-hk', 'pt-br', 'pt-pt', 'en-gb', 'fr-ca' ];
+		if ( ! in_array( $lang, $regional, true ) ) {
+			$lang = strtok( $lang, '-' );             // "de-de" -> "de".
+		}
+
+		/** Allow integrators to force a specific reCAPTCHA language code. */
+		return (string) apply_filters( 'sperhake_recaptcha_language', $lang );
 	}
 }

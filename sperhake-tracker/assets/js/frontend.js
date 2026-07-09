@@ -62,8 +62,8 @@
 		var results = document.getElementById( 'sperhake-results' );
 		var errorBox = document.getElementById( 'sperhake-search-error' );
 
-		function turnstileToken() {
-			var field = form.querySelector( '[name="cf-turnstile-response"]' );
+		function recaptchaToken() {
+			var field = form.querySelector( '[name="g-recaptcha-response"]' );
 			return field ? field.value : '';
 		}
 
@@ -86,8 +86,8 @@
 				return;
 			}
 
-			var token = turnstileToken();
-			if ( cfg.turnstileEnabled && ! token ) {
+			var token = recaptchaToken();
+			if ( cfg.recaptchaEnabled && ! token ) {
 				showError( errorBox, cfg.i18n.captchaWait );
 				return;
 			}
@@ -100,7 +100,7 @@
 				nonce: cfg.nonce,
 				license_plate: plate,
 				reference: reference,
-				cf_turnstile_response: token
+				'g-recaptcha-response': token
 			} ).then( function ( resp ) {
 				btn.disabled = false;
 				btn.textContent = cfg.i18n.search;
@@ -113,12 +113,12 @@
 					var msg = ( resp.json && resp.json.data && resp.json.data.message ) || cfg.i18n.genericErr;
 					showError( errorBox, msg );
 				}
-				resetTurnstile();
+				resetRecaptcha();
 			} ).catch( function () {
 				btn.disabled = false;
 				btn.textContent = cfg.i18n.search;
 				showError( errorBox, cfg.i18n.genericErr );
-				resetTurnstile();
+				resetRecaptcha();
 			} );
 		} );
 
@@ -127,10 +127,10 @@
 		bindPayButton();
 		bindInvoiceButton();
 
-		function resetTurnstile() {
-			// Turnstile tokens are single-use; reset so the next submit gets a fresh one.
-			if ( cfg.turnstileEnabled && window.turnstile && typeof window.turnstile.reset === 'function' ) {
-				try { window.turnstile.reset(); } catch ( e ) {}
+		function resetRecaptcha() {
+			// reCAPTCHA tokens are single-use; reset so the next submit gets a fresh one.
+			if ( cfg.recaptchaEnabled && window.grecaptcha && typeof window.grecaptcha.reset === 'function' ) {
+				try { window.grecaptcha.reset(); } catch ( e ) {}
 			}
 		}
 

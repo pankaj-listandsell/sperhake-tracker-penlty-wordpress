@@ -12,7 +12,7 @@ namespace SperhakeTracker\Frontend;
 use SperhakeTracker\Api\VehicleApiClient;
 use SperhakeTracker\Database\SearchLogRepository;
 use SperhakeTracker\Logging\Logger;
-use SperhakeTracker\Security\Turnstile;
+use SperhakeTracker\Security\Recaptcha;
 use SperhakeTracker\Support\Options;
 use SperhakeTracker\Support\Plate;
 
@@ -26,7 +26,7 @@ final class AjaxHandler {
 		private readonly VehicleApiClient $api,
 		private readonly Options $options,
 		private readonly Logger $logger,
-		private readonly Turnstile $turnstile,
+		private readonly Recaptcha $recaptcha,
 		private readonly SearchLogRepository $searchLogs
 	) {}
 
@@ -83,9 +83,9 @@ final class AjaxHandler {
 		$plate = Plate::normalise( $raw );
 		$ref   = isset( $_POST['reference'] ) ? sanitize_text_field( wp_unslash( $_POST['reference'] ) ) : '';
 
-		// 1. Bot protection — Cloudflare Turnstile (skipped automatically if unconfigured).
-		$token = isset( $_POST['cf_turnstile_response'] ) ? sanitize_text_field( wp_unslash( $_POST['cf_turnstile_response'] ) ) : '';
-		if ( ! $this->turnstile->verify( $token, $ip ) ) {
+		// 1. Bot protection — Google reCAPTCHA v2 (skipped automatically if unconfigured).
+		$token = isset( $_POST['g-recaptcha-response'] ) ? sanitize_text_field( wp_unslash( $_POST['g-recaptcha-response'] ) ) : '';
+		if ( ! $this->recaptcha->verify( $token, $ip ) ) {
 			$this->searchLogs->record( $plate, $ip, 'captcha_failed', '' !== $ref );
 			wp_send_json_error(
 				[ 'message' => __( 'Verification failed. Please complete the challenge and try again.', 'sperhake-tracker' ) ],

@@ -48,13 +48,13 @@ final class Shortcode {
 		wp_enqueue_script( Assets::HANDLE );
 
 		// Settings consumed by the form template.
-		$turnstile_site_key = $this->options->turnstile_site_key();
-		$turnstile_enabled  = '' !== $turnstile_site_key && '' !== $this->options->turnstile_secret();
+		$recaptcha_site_key = $this->options->recaptcha_site_key();
+		$recaptcha_enabled  = '' !== $recaptcha_site_key && '' !== $this->options->recaptcha_secret();
 		$require_reference  = $this->options->require_reference();
 		$reference_label    = $this->options->reference_label();
 
-		if ( $turnstile_enabled ) {
-			wp_enqueue_script( Assets::TURNSTILE );
+		if ( $recaptcha_enabled ) {
+			wp_enqueue_script( Assets::RECAPTCHA );
 		}
 
 		ob_start();

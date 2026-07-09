@@ -67,8 +67,8 @@ final class SettingsRegistry {
 		// --- Frontend security section (anti-bot + anti-enumeration). ---
 		add_settings_section( 'sperhake_api_security', __( 'Frontend Search Security', 'sperhake-tracker' ), [ $this, 'security_section_intro' ], 'sperhake_api_page' );
 
-		$this->field( 'sperhake_api_page', 'sperhake_api_security', Options::API, 'turnstile_site_key', __( 'Turnstile Site Key', 'sperhake-tracker' ), 'text', __( 'Cloudflare Turnstile site key. Leave blank to disable the CAPTCHA.', 'sperhake-tracker' ) );
-		$this->field( 'sperhake_api_page', 'sperhake_api_security', Options::API, 'turnstile_secret', __( 'Turnstile Secret Key', 'sperhake-tracker' ), 'secret' );
+		$this->field( 'sperhake_api_page', 'sperhake_api_security', Options::API, 'recaptcha_site_key', __( 'reCAPTCHA Site Key', 'sperhake-tracker' ), 'text', __( 'Google reCAPTCHA v2 ("I\'m not a robot") site key. Leave blank to disable the CAPTCHA.', 'sperhake-tracker' ) );
+		$this->field( 'sperhake_api_page', 'sperhake_api_security', Options::API, 'recaptcha_secret', __( 'reCAPTCHA Secret Key', 'sperhake-tracker' ), 'secret' );
 		$this->field( 'sperhake_api_page', 'sperhake_api_security', Options::API, 'require_reference', __( 'Require reference number', 'sperhake-tracker' ), 'checkbox', __( 'Forces a second identifier alongside the plate to prevent enumeration.', 'sperhake-tracker' ) );
 		$this->field( 'sperhake_api_page', 'sperhake_api_security', Options::API, 'reference_label', __( 'Reference field label', 'sperhake-tracker' ), 'text', __( 'e.g. "Case Number" or "Reference Number". Sent to the API as "reference".', 'sperhake-tracker' ) );
 	}
@@ -92,8 +92,8 @@ final class SettingsRegistry {
 			'headers'            => sanitize_textarea_field( (string) ( $input['headers'] ?? '' ) ),
 			'api_key'            => $this->keep_or_encrypt( $input['api_key'] ?? '', $current['api_key'] ?? '' ),
 			'api_secret'         => $this->keep_or_encrypt( $input['api_secret'] ?? '', $current['api_secret'] ?? '' ),
-			'turnstile_site_key' => sanitize_text_field( (string) ( $input['turnstile_site_key'] ?? '' ) ),
-			'turnstile_secret'   => $this->keep_or_encrypt( $input['turnstile_secret'] ?? '', $current['turnstile_secret'] ?? '' ),
+			'recaptcha_site_key' => sanitize_text_field( (string) ( $input['recaptcha_site_key'] ?? '' ) ),
+			'recaptcha_secret'   => $this->keep_or_encrypt( $input['recaptcha_secret'] ?? '', $current['recaptcha_secret'] ?? '' ),
 			'require_reference'  => empty( $input['require_reference'] ) ? 0 : 1,
 			'reference_label'    => sanitize_text_field( (string) ( $input['reference_label'] ?? '' ) ),
 		];
