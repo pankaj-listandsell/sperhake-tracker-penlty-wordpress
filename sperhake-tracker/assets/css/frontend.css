@@ -264,7 +264,35 @@
 
 /* Invoice request */
 .sperhake-invoice { padding: 10px 20px 20px; }
-.sperhake-invoice__email {
+.sperhake-invoice[hidden] { display: none; }
+.sperhake-invoice__title {
+	margin: 6px 0 4px;
+	font-size: 1.02rem;
+	color: var(--sperhake-primary, #3a312a);
+}
+.sperhake-invoice__intro {
+	margin: 0 0 14px;
+	font-size: 0.88rem;
+	color: #6b7280;
+	line-height: 1.45;
+}
+.sperhake-invoice__grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 12px;
+}
+.sperhake-invoice__field {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+.sperhake-invoice__field--full { grid-column: 1 / -1; }
+.sperhake-invoice__field-label {
+	font-size: 0.82rem;
+	font-weight: 600;
+	color: var(--sperhake-primary, #3a312a);
+}
+.sperhake-invoice__input {
 	width: 100%;
 	padding: 12px 14px;
 	font-size: 0.95rem;
@@ -272,10 +300,14 @@
 	border-radius: 10px;
 	transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
-.sperhake-invoice__email:focus {
+.sperhake-invoice__input:focus {
 	outline: none;
 	border-color: var(--sperhake-accent, #f9b022);
 	box-shadow: 0 0 0 3px rgba(249, 176, 34, 0.22);
+}
+.sperhake-invoice__submit {
+	margin-top: 16px;
+	width: 100%;
 }
 .sperhake-invoice__msg {
 	margin: 10px 0 0;
@@ -285,6 +317,10 @@
 }
 .sperhake-invoice__msg.is-ok { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; }
 .sperhake-invoice__msg.is-error { background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; }
+
+@media (max-width: 480px) {
+	.sperhake-invoice__grid { grid-template-columns: 1fr; }
+}
 
 /* Badges */
 .sperhake-badge {

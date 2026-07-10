@@ -141,6 +141,82 @@ final class TransactionRepository {
 	}
 
 	/**
+	 * Find the most recent paid transaction for a relocation case id.
+	 */
+	public function latest_paid_for_case( string $case_id ): ?object {
+		global $wpdb;
+
+		if ( '' === $case_id ) {
+			return null;
+		}
+
+		return $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM {$this->table}
+				 WHERE vehicle_id = %s AND payment_status = 'paid'
+				 ORDER BY id DESC
+				 LIMIT 1", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+				$case_id
+			)
+		);
+	}
+
+	/**
+	 * Find the most recent paid transaction for a license plate.
+	 */
+	public function latest_paid_for_plate( string $plate ): ?object {
+		global $wpdb;
+
+		if ( '' === $plate ) {
+			return null;
+		}
+
+		return $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM {$this->table}
+				 WHERE license_plate = %s AND payment_status = 'paid'
+				 ORDER BY id DESC
+				 LIMIT 1", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+				$plate
+			)
+		);
+	}
+
+	/**
+	 * Extract the billing details captured from Stripe for pre-filling the
+	 * "request invoice" form. Prefers the Stripe billing snapshot stored in
+	 * meta.customer at webhook time, falling back to the transaction columns.
+	 *
+	 * @return array{legal_name: string, email: string, address_street: string, address_zip: string, address_city: string, address_country: string}
+	 */
+	public static function customer_details( ?object $transaction ): array {
+		$details = [
+			'legal_name'      => '',
+			'email'           => '',
+			'address_street'  => '',
+			'address_zip'     => '',
+			'address_city'    => '',
+			'address_country' => '',
+		];
+
+		if ( ! $transaction ) {
+			return $details;
+		}
+
+		$meta     = json_decode( (string) ( $transaction->meta ?? '' ), true );
+		$customer = is_array( $meta ) && isset( $meta['customer'] ) && is_array( $meta['customer'] ) ? $meta['customer'] : [];
+
+		$details['legal_name']      = (string) ( $customer['legal_name'] ?? $transaction->customer_name ?? '' );
+		$details['email']           = (string) ( $customer['email'] ?? $transaction->customer_email ?? '' );
+		$details['address_street']  = (string) ( $customer['address_street'] ?? '' );
+		$details['address_zip']     = (string) ( $customer['address_zip'] ?? '' );
+		$details['address_city']    = (string) ( $customer['address_city'] ?? '' );
+		$details['address_country'] = (string) ( $customer['address_country'] ?? '' );
+
+		return $details;
+	}
+
+	/**
 	 * Fetch a transaction by ref + receipt token (used for public receipt download).
 	 */
 	public function find_for_receipt( string $ref, string $token ): ?object {

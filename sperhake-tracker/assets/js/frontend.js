@@ -136,12 +136,39 @@
 
 		function bindInvoiceButton() {
 			var invBtn = document.getElementById( 'sperhake-invoice-btn' );
-			if ( ! invBtn ) {
+			var formEl = document.getElementById( 'sperhake-invoice-form' );
+			if ( ! invBtn || ! formEl ) {
 				return;
 			}
 
-			var msgEl   = document.getElementById( 'sperhake-invoice-msg' );
-			var emailEl = document.getElementById( 'sperhake-invoice-email' );
+			// The "Request Invoice" button reveals the pre-filled details form.
+			invBtn.addEventListener( 'click', function () {
+				var open = formEl.hidden;
+				formEl.hidden = ! open;
+				invBtn.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+				if ( open ) {
+					var first = document.getElementById( 'sperhake-invoice-name' );
+					if ( first ) {
+						first.focus();
+					}
+				}
+			} );
+
+			bindInvoiceSubmit();
+		}
+
+		function bindInvoiceSubmit() {
+			var submitBtn = document.getElementById( 'sperhake-invoice-submit' );
+			if ( ! submitBtn ) {
+				return;
+			}
+
+			var msgEl = document.getElementById( 'sperhake-invoice-msg' );
+
+			function fieldVal( id ) {
+				var el = document.getElementById( id );
+				return el ? ( el.value || '' ).trim() : '';
+			}
 
 			function showMsg( text, ok ) {
 				if ( ! msgEl ) {
@@ -152,30 +179,35 @@
 				msgEl.className = 'sperhake-invoice__msg ' + ( ok ? 'is-ok' : 'is-error' );
 			}
 
-			invBtn.addEventListener( 'click', function () {
-				var original = invBtn.textContent;
-				invBtn.disabled = true;
-				invBtn.textContent = cfg.i18n.requestingInvoice;
+			submitBtn.addEventListener( 'click', function () {
+				var original = submitBtn.textContent;
+				submitBtn.disabled = true;
+				submitBtn.textContent = cfg.i18n.requestingInvoice;
 				if ( msgEl ) {
 					msgEl.hidden = true;
 				}
 
 				postForm( {
 					action: 'sperhake_request_invoice',
-					nonce: invBtn.getAttribute( 'data-nonce' ),
-					case_id: invBtn.getAttribute( 'data-case' ),
-					email: emailEl ? ( emailEl.value || '' ).trim() : ''
+					nonce: submitBtn.getAttribute( 'data-nonce' ),
+					case_id: submitBtn.getAttribute( 'data-case' ),
+					legal_name: fieldVal( 'sperhake-invoice-name' ),
+					email: fieldVal( 'sperhake-invoice-email' ),
+					address_street: fieldVal( 'sperhake-invoice-street' ),
+					address_zip: fieldVal( 'sperhake-invoice-zip' ),
+					address_city: fieldVal( 'sperhake-invoice-city' ),
+					address_country: fieldVal( 'sperhake-invoice-country' )
 				} ).then( function ( resp ) {
-					invBtn.disabled = false;
-					invBtn.textContent = original;
+					submitBtn.disabled = false;
+					submitBtn.textContent = original;
 
 					var ok   = resp.ok && resp.json && resp.json.success;
 					var text = ( resp.json && resp.json.data && resp.json.data.message ) ||
 						( ok ? cfg.i18n.invoiceRequested : cfg.i18n.genericErr );
 					showMsg( text, ok );
 				} ).catch( function () {
-					invBtn.disabled = false;
-					invBtn.textContent = original;
+					submitBtn.disabled = false;
+					submitBtn.textContent = original;
 					showMsg( cfg.i18n.genericErr, false );
 				} );
 			} );

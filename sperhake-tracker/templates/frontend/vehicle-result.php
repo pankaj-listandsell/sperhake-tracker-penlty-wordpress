@@ -3,8 +3,9 @@
  * Server-rendered vehicle result card (returned via AJAX).
  *
  * @package SperhakeTracker
- * @var array<string, mixed> $vehicle   Normalised vehicle data.
- * @var string               $pay_nonce Nonce for the pay action.
+ * @var array<string, mixed> $vehicle          Normalised vehicle data.
+ * @var string               $pay_nonce        Nonce for the pay action.
+ * @var array<string, string> $invoice_customer Stripe billing details to pre-fill the invoice form.
  */
 
 declare(strict_types=1);
@@ -15,6 +16,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $has_penalty   = $vehicle['penalty_cents'] > 0;
 $penalty_label = number_format_i18n( $vehicle['penalty_cents'] / 100, 2 ) . ' ' . strtoupper( (string) $vehicle['currency'] );
+
+// Invoice-form pre-fill (from the Stripe billing snapshot). Defensive default
+// in case this template is included directly / by a theme override.
+$invoice_customer = ( isset( $invoice_customer ) && is_array( $invoice_customer ) ) ? $invoice_customer : [];
+$ic = static function ( string $key ) use ( $invoice_customer ): string {
+	return isset( $invoice_customer[ $key ] ) ? (string) $invoice_customer[ $key ] : '';
+};
+// Fall back to the vehicle owner's name when Stripe captured none.
+$invoice_name = '' !== $ic( 'legal_name' ) ? $ic( 'legal_name' ) : (string) ( $vehicle['owner_name'] ?? '' );
 
 /**
  * Render a labelled row if the value is non-empty.
@@ -39,7 +49,11 @@ $row = static function ( string $label, string $value ): void {
 
 	<div class="sperhake-vehicle__grid">
 		<?php
+		$row( __( 'Case Number', 'sperhake-tracker' ), (string) ( $vehicle['case_number'] ?? '' ) );
 		$row( __( 'Owner', 'sperhake-tracker' ), (string) $vehicle['owner_name'] );
+		$row( __( 'Vehicle Brand', 'sperhake-tracker' ), (string) ( $vehicle['vehicle_brand'] ?? '' ) );
+		$row( __( 'Partner', 'sperhake-tracker' ), (string) ( $vehicle['partner_name'] ?? '' ) );
+		$row( __( 'Towing Vehicle', 'sperhake-tracker' ), (string) ( $vehicle['truck_code'] ?? '' ) );
 		$row( __( 'Status', 'sperhake-tracker' ), ucfirst( (string) $vehicle['status'] ) );
 		$row( __( 'Towed Date', 'sperhake-tracker' ), (string) $vehicle['towed_date'] );
 		$row( __( 'Towed Time', 'sperhake-tracker' ), (string) $vehicle['towed_time'] );
@@ -132,20 +146,61 @@ $row = static function ( string $label, string $value ): void {
 				type="button"
 				class="sperhake-btn sperhake-btn--invoice"
 				id="sperhake-invoice-btn"
-				data-case="<?php echo esc_attr( (string) $vehicle['vehicle_id'] ); ?>"
-				data-nonce="<?php echo esc_attr( $invoice_nonce ); ?>"
+				aria-expanded="false"
+				aria-controls="sperhake-invoice-form"
 			>
 				<?php esc_html_e( 'Request Invoice', 'sperhake-tracker' ); ?>
 			</button>
 		</div>
 
-		<div class="sperhake-invoice">
-			<input
-				type="email"
-				class="sperhake-invoice__email"
-				id="sperhake-invoice-email"
-				placeholder="<?php esc_attr_e( 'Send invoice to a different email (optional)', 'sperhake-tracker' ); ?>"
-			/>
+		<div class="sperhake-invoice" id="sperhake-invoice-form" hidden>
+			<h4 class="sperhake-invoice__title"><?php esc_html_e( 'Invoice Details', 'sperhake-tracker' ); ?></h4>
+			<p class="sperhake-invoice__intro">
+				<?php esc_html_e( 'Please confirm or update your billing details below. The invoice will be issued to this recipient and address.', 'sperhake-tracker' ); ?>
+			</p>
+
+			<div class="sperhake-invoice__grid">
+				<label class="sperhake-invoice__field sperhake-invoice__field--full">
+					<span class="sperhake-invoice__field-label"><?php esc_html_e( 'Name', 'sperhake-tracker' ); ?></span>
+					<input type="text" id="sperhake-invoice-name" class="sperhake-invoice__input" autocomplete="name"
+						value="<?php echo esc_attr( $invoice_name ); ?>" />
+				</label>
+				<label class="sperhake-invoice__field sperhake-invoice__field--full">
+					<span class="sperhake-invoice__field-label"><?php esc_html_e( 'Email', 'sperhake-tracker' ); ?></span>
+					<input type="email" id="sperhake-invoice-email" class="sperhake-invoice__input" autocomplete="email"
+						value="<?php echo esc_attr( $ic( 'email' ) ); ?>" />
+				</label>
+				<label class="sperhake-invoice__field sperhake-invoice__field--full">
+					<span class="sperhake-invoice__field-label"><?php esc_html_e( 'Street & House Number', 'sperhake-tracker' ); ?></span>
+					<input type="text" id="sperhake-invoice-street" class="sperhake-invoice__input" autocomplete="street-address"
+						value="<?php echo esc_attr( $ic( 'address_street' ) ); ?>" />
+				</label>
+				<label class="sperhake-invoice__field">
+					<span class="sperhake-invoice__field-label"><?php esc_html_e( 'Postal Code', 'sperhake-tracker' ); ?></span>
+					<input type="text" id="sperhake-invoice-zip" class="sperhake-invoice__input" autocomplete="postal-code"
+						value="<?php echo esc_attr( $ic( 'address_zip' ) ); ?>" />
+				</label>
+				<label class="sperhake-invoice__field">
+					<span class="sperhake-invoice__field-label"><?php esc_html_e( 'City', 'sperhake-tracker' ); ?></span>
+					<input type="text" id="sperhake-invoice-city" class="sperhake-invoice__input" autocomplete="address-level2"
+						value="<?php echo esc_attr( $ic( 'address_city' ) ); ?>" />
+				</label>
+				<label class="sperhake-invoice__field sperhake-invoice__field--full">
+					<span class="sperhake-invoice__field-label"><?php esc_html_e( 'Country', 'sperhake-tracker' ); ?></span>
+					<input type="text" id="sperhake-invoice-country" class="sperhake-invoice__input" autocomplete="country-name"
+						value="<?php echo esc_attr( $ic( 'address_country' ) ); ?>" />
+				</label>
+			</div>
+
+			<button
+				type="button"
+				class="sperhake-btn sperhake-btn--map sperhake-invoice__submit"
+				id="sperhake-invoice-submit"
+				data-case="<?php echo esc_attr( (string) $vehicle['vehicle_id'] ); ?>"
+				data-nonce="<?php echo esc_attr( $invoice_nonce ); ?>"
+			>
+				<?php esc_html_e( 'Send Invoice Request', 'sperhake-tracker' ); ?>
+			</button>
 			<p class="sperhake-invoice__msg" id="sperhake-invoice-msg" hidden></p>
 		</div>
 	<?php else : ?>

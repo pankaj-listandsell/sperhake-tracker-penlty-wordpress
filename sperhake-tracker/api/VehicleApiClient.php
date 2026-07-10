@@ -74,7 +74,33 @@ final class VehicleApiClient {
 			return [
 				'ok'      => false,
 				'code'    => 404,
-				'message' => __( 'No vehicle was found for that license plate.', 'sperhake-tracker' ),
+				'message' => ( is_array( $body ) && ! empty( $body['message'] ) )
+					? (string) $body['message']
+					: __( 'No vehicle was found for that license plate.', 'sperhake-tracker' ),
+			];
+		}
+
+		// A released or cancelled case comes back as HTTP 200 with found=false and
+		// a human-readable message (plus a released_at / cancelled_at timestamp).
+		// Surface that instead of rendering an empty "found" card.
+		if ( is_array( $body ) && array_key_exists( 'found', $body ) && false === $body['found'] ) {
+			$message = ! empty( $body['message'] )
+				? (string) $body['message']
+				: __( 'This vehicle is not available for online payment.', 'sperhake-tracker' );
+
+			$when = (string) ( $body['released_at'] ?? $body['cancelled_at'] ?? '' );
+			if ( '' !== $when ) {
+				$timestamp = strtotime( $when );
+				if ( false !== $timestamp ) {
+					$message .= ' (' . date_i18n( get_option( 'date_format' ), $timestamp ) . ')';
+				}
+			}
+
+			return [
+				'ok'      => false,
+				'code'    => 404,
+				'state'   => (string) ( $body['state'] ?? $body['status'] ?? 'unavailable' ),
+				'message' => $message,
 			];
 		}
 
@@ -144,7 +170,14 @@ final class VehicleApiClient {
 		return [
 			'license_plate'        => (string) ( $v['plate'] ?? $v['license_plate'] ?? $plate ),
 			'owner_name'           => isset( $v['owner_name'] ) ? (string) $v['owner_name'] : '',
+			// Numeric case id — used internally for the /{caseId}/paid & request-invoice routes.
 			'vehicle_id'           => (string) ( $v['case_id'] ?? $v['vehicle_id'] ?? '' ),
+			// Human-facing case reference (e.g. "UM-202600039"), shown to the customer.
+			'case_number'          => (string) ( $v['case_number'] ?? '' ),
+			'vehicle_brand'        => (string) ( $v['vehicle_brand'] ?? '' ),
+			'vehicle_type'         => (string) ( $v['vehicle_type'] ?? '' ),
+			'partner_name'         => (string) ( $v['partner_name'] ?? '' ),
+			'truck_code'           => (string) ( $v['truck_code'] ?? '' ),
 			'status'               => (string) ( $v['status_for_display'] ?? $v['status'] ?? 'unknown' ),
 			'towed_date'           => $towed_date,
 			'towed_time'           => $towed_time,
@@ -169,15 +202,19 @@ final class VehicleApiClient {
 	}
 
 	/**
-	 * Ask the relocation API to (re)send the invoice for a paid case.
+	 * Ask the relocation API to (re)send the invoice for a paid case, forwarding
+	 * the billing details the customer confirmed so the main system can update
+	 * its customer + invoice records before (re)issuing the invoice.
 	 *
-	 * POST /{case_id}/request-invoice with an optional { email } override.
+	 * POST /{case_id}/request-invoice with a { customer: {...} } body.
 	 *
-	 * @param string $case_id Relocation case id (the normalised vehicle_id).
-	 * @param string $email   Optional recipient override; '' uses the stored address.
+	 * @param string                $case_id  Relocation case id (the normalised vehicle_id).
+	 * @param array<string, string> $customer Confirmed billing details (legal_name,
+	 *                                        email, address_street, address_zip,
+	 *                                        address_city, address_country).
 	 * @return array{ok: bool, message: string}
 	 */
-	public function request_invoice( string $case_id, string $email = '' ): array {
+	public function request_invoice( string $case_id, array $customer = [] ): array {
 		$base = $this->options->api_url();
 
 		if ( '' === $base || '' === $case_id ) {
@@ -187,12 +224,17 @@ final class VehicleApiClient {
 			];
 		}
 
-		// Encode as an object so an empty payload serialises to "{}" (not "[]").
-		$payload  = [];
-		if ( '' !== $email ) {
-			$payload['email'] = $email;
-		}
-		$body     = (string) wp_json_encode( (object) $payload );
+		$payload  = [
+			'customer' => [
+				'legal_name'      => (string) ( $customer['legal_name'] ?? '' ),
+				'email'           => (string) ( $customer['email'] ?? '' ),
+				'address_street'  => (string) ( $customer['address_street'] ?? '' ),
+				'address_zip'     => (string) ( $customer['address_zip'] ?? '' ),
+				'address_city'    => (string) ( $customer['address_city'] ?? '' ),
+				'address_country' => (string) ( $customer['address_country'] ?? '' ),
+			],
+		];
+		$body     = (string) wp_json_encode( $payload );
 		$endpoint = $this->build_url( $base, rawurlencode( $case_id ) . '/request-invoice' );
 
 		$response = wp_remote_post(

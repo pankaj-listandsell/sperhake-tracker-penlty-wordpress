@@ -153,6 +153,10 @@ final class Shortcode {
 		$pay_nonce     = wp_create_nonce( 'sperhake_pay' );
 		$invoice_nonce = wp_create_nonce( 'sperhake_invoice' );
 
+		// Pre-fill the invoice form with the Stripe billing details from this
+		// just-paid transaction.
+		$invoice_customer = TransactionRepository::customer_details( $transaction );
+
 		echo '<div class="sperhake-results sperhake-results--post-payment" aria-live="polite">';
 		include $template;
 		echo '</div>';

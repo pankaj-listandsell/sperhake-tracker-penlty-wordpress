@@ -56,6 +56,9 @@ msgstr "Fallnummer"
 msgid "Channel"
 msgstr "Kanal"
 
+msgid "City"
+msgstr "Stadt"
+
 msgid "Contact"
 msgstr "Kontakt"
 
@@ -70,6 +73,9 @@ msgstr "Die Rechnung konnte nicht angefordert werden."
 
 msgid "Could not start the payment. Please try again."
 msgstr "Die Zahlung konnte nicht gestartet werden. Bitte versuchen Sie es erneut."
+
+msgid "Country"
+msgstr "Land"
 
 msgid "Currency"
 msgstr "Währung"
@@ -173,6 +179,9 @@ msgstr "Unzureichende Berechtigungen."
 msgid "Invalid license plate."
 msgstr "Ungültiges Kennzeichen."
 
+msgid "Invoice Details"
+msgstr "Rechnungsdetails"
+
 msgid "Invoice requested."
 msgstr "Rechnung angefordert."
 
@@ -212,6 +221,9 @@ msgstr "Fehlende Fallreferenz."
 msgid "Mode"
 msgstr "Modus"
 
+msgid "Name"
+msgstr "Name"
+
 msgid "No Outstanding Penalties"
 msgstr "Keine offenen Gebühren"
 
@@ -247,6 +259,9 @@ msgstr "Halter"
 
 msgid "Paid"
 msgstr "Bezahlt"
+
+msgid "Partner"
+msgstr "Partner"
 
 msgid "Pay Now – %s"
 msgstr "Jetzt bezahlen – %s"
@@ -284,6 +299,9 @@ msgstr "Personenbezogene Daten in den Abschlepp-Gebührendatensätzen wurden ano
 msgid "Please complete the verification first."
 msgstr "Bitte schließen Sie zuerst die Verifizierung ab."
 
+msgid "Please confirm or update your billing details below. The invoice will be issued to this recipient and address."
+msgstr "Bitte bestätigen oder aktualisieren Sie unten Ihre Rechnungsdaten. Die Rechnung wird an diesen Empfänger und diese Adresse ausgestellt."
+
 msgid "Please enter a license plate."
 msgstr "Bitte geben Sie ein Kennzeichen ein."
 
@@ -293,6 +311,9 @@ msgstr "Bitte geben Sie eine gültige E-Mail-Adresse ein."
 msgid "Please enter a valid license plate."
 msgstr "Bitte geben Sie ein gültiges Kennzeichen ein."
 
+msgid "Please enter the invoice recipient name."
+msgstr "Bitte geben Sie den Namen des Rechnungsempfängers ein."
+
 msgid "Please enter the required reference."
 msgstr "Bitte geben Sie die erforderliche Referenz ein."
 
@@ -301,6 +322,9 @@ msgstr "Bitte geben Sie Ihre %s ein, um dieses Fahrzeug zu suchen."
 
 msgid "Plugin activation error"
 msgstr "Fehler bei der Plugin-Aktivierung"
+
+msgid "Postal Code"
+msgstr "Postleitzahl"
 
 msgid "Protect the public search form against bots and plate enumeration."
 msgstr "Schützt das öffentliche Suchformular vor Bots und Kennzeichen-Enumeration."
@@ -365,6 +389,9 @@ msgstr "Geheimer Schlüssel"
 msgid "Secure payment powered by Stripe. Cards, Apple Pay & Google Pay accepted."
 msgstr "Sichere Zahlung über Stripe. Karten, Apple Pay & Google Pay akzeptiert."
 
+msgid "Send Invoice Request"
+msgstr "Rechnungsanfrage senden"
+
 msgid "Send invoice to a different email (optional)"
 msgstr "Rechnung an eine andere E-Mail senden (optional)"
 
@@ -397,6 +424,9 @@ msgstr "Verwahrstelle"
 
 msgid "Stored encrypted. Leave blank to keep the current value."
 msgstr "Verschlüsselt gespeichert. Leer lassen, um den aktuellen Wert beizubehalten."
+
+msgid "Street & House Number"
+msgstr "Straße & Hausnummer"
 
 msgid "Stripe Configuration"
 msgstr "Stripe-Konfiguration"
@@ -446,6 +476,9 @@ msgstr "Diese Gebühr wurde bereits bezahlt."
 msgid "This receipt link has expired. Please contact us to request a new copy."
 msgstr "Dieser Beleg-Link ist abgelaufen. Bitte kontaktieren Sie uns, um eine neue Kopie anzufordern."
 
+msgid "This vehicle is not available for online payment."
+msgstr "Dieses Fahrzeug ist nicht für die Online-Zahlung verfügbar."
+
 msgid "Time (UTC)"
 msgstr "Zeit (UTC)"
 
@@ -467,6 +500,9 @@ msgstr "Abschleppzeit"
 msgid "Towing Location"
 msgstr "Abschlepport"
 
+msgid "Towing Vehicle"
+msgstr "Abschleppfahrzeug"
+
 msgid "Towing penalty payments"
 msgstr "Abschleppgebühren-Zahlungen"
 
@@ -485,6 +521,9 @@ msgstr "Transaktionsprotokolle"
 msgid "Unexpected response from the vehicle database."
 msgstr "Unerwartete Antwort von der Fahrzeugdatenbank."
 
+msgid "Vehicle Brand"
+msgstr "Fahrzeugmarke"
+
 msgid "Vehicle Found"
 msgstr "Fahrzeug gefunden"
 
@@ -499,6 +538,9 @@ msgstr "Fahrzeug verbracht nach"
 
 msgid "Vehicle Tracking API"
 msgstr "Fahrzeugverfolgungs-API"
+
+msgid "Vehicle Type"
+msgstr "Fahrzeugtyp"
 
 msgid "Vehicle lookup is temporarily unavailable. Please contact us."
 msgstr "Die Fahrzeugsuche ist vorübergehend nicht verfügbar. Bitte kontaktieren Sie uns."

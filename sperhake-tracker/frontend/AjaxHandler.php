@@ -11,6 +11,7 @@ namespace SperhakeTracker\Frontend;
 
 use SperhakeTracker\Api\VehicleApiClient;
 use SperhakeTracker\Database\SearchLogRepository;
+use SperhakeTracker\Database\TransactionRepository;
 use SperhakeTracker\Logging\Logger;
 use SperhakeTracker\Security\Recaptcha;
 use SperhakeTracker\Support\Options;
@@ -27,7 +28,8 @@ final class AjaxHandler {
 		private readonly Options $options,
 		private readonly Logger $logger,
 		private readonly Recaptcha $recaptcha,
-		private readonly SearchLogRepository $searchLogs
+		private readonly SearchLogRepository $searchLogs,
+		private readonly TransactionRepository $transactions
 	) {}
 
 	public function register(): void {
@@ -50,17 +52,34 @@ final class AjaxHandler {
 		check_ajax_referer( 'sperhake_invoice', 'nonce' );
 
 		$case_id = isset( $_POST['case_id'] ) ? sanitize_text_field( wp_unslash( $_POST['case_id'] ) ) : '';
-		$email   = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
 
 		if ( '' === $case_id ) {
 			wp_send_json_error( [ 'message' => __( 'Missing case reference.', 'sperhake-tracker' ) ], 422 );
 		}
 
-		if ( '' !== $email && ! is_email( $email ) ) {
+		// Billing details the customer confirmed (or corrected) on the form.
+		$customer = [
+			'legal_name'      => isset( $_POST['legal_name'] ) ? sanitize_text_field( wp_unslash( $_POST['legal_name'] ) ) : '',
+			'email'           => isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '',
+			'address_street'  => isset( $_POST['address_street'] ) ? sanitize_text_field( wp_unslash( $_POST['address_street'] ) ) : '',
+			'address_zip'     => isset( $_POST['address_zip'] ) ? sanitize_text_field( wp_unslash( $_POST['address_zip'] ) ) : '',
+			'address_city'    => isset( $_POST['address_city'] ) ? sanitize_text_field( wp_unslash( $_POST['address_city'] ) ) : '',
+			'address_country' => isset( $_POST['address_country'] ) ? sanitize_text_field( wp_unslash( $_POST['address_country'] ) ) : '',
+		];
+
+		if ( '' === $customer['legal_name'] ) {
+			wp_send_json_error( [ 'message' => __( 'Please enter the invoice recipient name.', 'sperhake-tracker' ) ], 422 );
+		}
+
+		if ( '' === $customer['email'] || ! is_email( $customer['email'] ) ) {
 			wp_send_json_error( [ 'message' => __( 'Please enter a valid email address.', 'sperhake-tracker' ) ], 422 );
 		}
 
-		$result = $this->api->request_invoice( $case_id, $email );
+		// Persist the confirmed details locally first, so the stored record (and
+		// any future receipt) reflects exactly what the customer submitted.
+		$this->update_local_customer( $case_id, $customer );
+
+		$result = $this->api->request_invoice( $case_id, $customer );
 
 		if ( empty( $result['ok'] ) ) {
 			wp_send_json_error(
@@ -70,6 +89,35 @@ final class AjaxHandler {
 		}
 
 		wp_send_json_success( [ 'message' => $result['message'] ?? __( 'Invoice requested.', 'sperhake-tracker' ) ] );
+	}
+
+	/**
+	 * Update the local paid transaction with the customer details the visitor
+	 * confirmed on the invoice form. Best-effort: never blocks the API forward.
+	 *
+	 * @param array<string, string> $customer Sanitised customer fields.
+	 */
+	private function update_local_customer( string $case_id, array $customer ): void {
+		$transaction = $this->transactions->latest_paid_for_case( $case_id );
+		if ( ! $transaction ) {
+			return;
+		}
+
+		$meta = json_decode( (string) $transaction->meta, true );
+		$meta = is_array( $meta ) ? $meta : [];
+		$meta['customer'] = array_merge(
+			is_array( $meta['customer'] ?? null ) ? $meta['customer'] : [],
+			$customer
+		);
+
+		$this->transactions->update(
+			(int) $transaction->id,
+			[
+				'customer_name'  => $customer['legal_name'],
+				'customer_email' => $customer['email'],
+				'meta'           => $meta,
+			]
+		);
 	}
 
 	/**
@@ -242,6 +290,18 @@ final class AjaxHandler {
 		// Build the Pay-Now & invoice nonces the template needs.
 		$pay_nonce     = wp_create_nonce( 'sperhake_pay' );
 		$invoice_nonce = wp_create_nonce( 'sperhake_invoice' );
+
+		// Pre-fill the invoice form with the Stripe billing details captured for
+		// this paid case, so the customer can confirm or correct them. Only the
+		// paid branch of the template renders the form, so skip the lookup otherwise.
+		$invoice_customer = [];
+		if ( ! empty( $vehicle['is_paid'] ) ) {
+			$paid = $this->transactions->latest_paid_for_case( (string) $vehicle['vehicle_id'] );
+			if ( ! $paid ) {
+				$paid = $this->transactions->latest_paid_for_plate( (string) $vehicle['license_plate'] );
+			}
+			$invoice_customer = TransactionRepository::customer_details( $paid );
+		}
 
 		ob_start();
 		include $template;

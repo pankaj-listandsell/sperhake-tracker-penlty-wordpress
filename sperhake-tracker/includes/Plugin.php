@@ -188,7 +188,8 @@ final class Plugin {
 			$this->get( 'options' ),
 			$this->get( 'logger' ),
 			$this->get( 'recaptcha' ),
-			$this->get( 'search_logs' )
+			$this->get( 'search_logs' ),
+			$this->get( 'transactions' )
 		);
 
 		$assets->register();
