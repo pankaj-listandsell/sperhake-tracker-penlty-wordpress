@@ -96,6 +96,22 @@
 .sperhake-btn:active { transform: translateY(1px); }
 .sperhake-btn:disabled { opacity: 0.6; cursor: progress; }
 
+/* Theme link colors can bleed into anchor-based buttons (e.g. the receipt
+   download link), turning the label the same hue as the button background and
+   hiding the text. Keep each button's own text color across all link states. */
+a.sperhake-btn--primary,
+a.sperhake-btn--primary:link,
+a.sperhake-btn--primary:visited,
+a.sperhake-btn--primary:hover,
+a.sperhake-btn--primary:focus,
+a.sperhake-btn--primary:active { color: #3a312a !important; }
+a.sperhake-btn--map,
+a.sperhake-btn--map:link,
+a.sperhake-btn--map:visited,
+a.sperhake-btn--map:hover,
+a.sperhake-btn--map:focus,
+a.sperhake-btn--map:active { color: #fff !important; }
+
 .sperhake-btn--primary {
 	background: var(--sperhake-accent, #f9b022);
 	color: #3a312a;
@@ -107,6 +123,7 @@
 
 .sperhake-search__hint { margin: 8px 0 0; font-size: 0.82rem; color: #6b7280; }
 .sperhake-recaptcha { margin-top: 16px; }
+.sperhake-search__actions { margin-top: 16px; }
 
 .sperhake-search__error {
 	margin: 12px 0 0;

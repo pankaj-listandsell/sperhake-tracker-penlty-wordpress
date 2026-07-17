@@ -46,11 +46,6 @@ $reference_label    = isset( $reference_label ) ? (string) $reference_label : __
 				maxlength="32"
 				required
 			/>
-			<?php if ( ! $require_reference ) : ?>
-				<button type="submit" class="sperhake-btn sperhake-btn--primary" id="sperhake-search-btn">
-					<?php esc_html_e( 'Search Vehicle', 'sperhake-tracker' ); ?>
-				</button>
-			<?php endif; ?>
 		</div>
 
 		<?php if ( $require_reference ) : ?>
@@ -67,9 +62,6 @@ $reference_label    = isset( $reference_label ) ? (string) $reference_label : __
 					maxlength="64"
 					required
 				/>
-				<button type="submit" class="sperhake-btn sperhake-btn--primary" id="sperhake-search-btn">
-					<?php esc_html_e( 'Search Vehicle', 'sperhake-tracker' ); ?>
-				</button>
 			</div>
 			<p class="sperhake-search__hint">
 				<?php
@@ -88,6 +80,12 @@ $reference_label    = isset( $reference_label ) ? (string) $reference_label : __
 				data-sitekey="<?php echo esc_attr( $recaptcha_site_key ); ?>"
 			></div>
 		<?php endif; ?>
+
+		<div class="sperhake-search__actions">
+			<button type="submit" class="sperhake-btn sperhake-btn--primary" id="sperhake-search-btn">
+				<?php esc_html_e( 'Search Vehicle', 'sperhake-tracker' ); ?>
+			</button>
+		</div>
 
 		<p class="sperhake-search__error" id="sperhake-search-error" role="alert" hidden></p>
 	</form>

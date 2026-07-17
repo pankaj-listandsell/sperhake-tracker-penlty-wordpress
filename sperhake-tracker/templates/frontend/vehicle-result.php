@@ -156,7 +156,7 @@ $row = static function ( string $label, string $value ): void {
 		<div class="sperhake-invoice" id="sperhake-invoice-form" hidden>
 			<h4 class="sperhake-invoice__title"><?php esc_html_e( 'Invoice Details', 'sperhake-tracker' ); ?></h4>
 			<p class="sperhake-invoice__intro">
-				<?php esc_html_e( 'Please confirm or update your billing details below. The invoice will be issued to this recipient and address.', 'sperhake-tracker' ); ?>
+				<?php esc_html_e( 'Please check your details below and change anything that isn\'t right. We\'ll send your invoice to this name and address.', 'sperhake-tracker' ); ?>
 			</p>
 
 			<div class="sperhake-invoice__grid">
