@@ -232,6 +232,7 @@ final class VehicleApiClient {
 				'address_zip'     => (string) ( $customer['address_zip'] ?? '' ),
 				'address_city'    => (string) ( $customer['address_city'] ?? '' ),
 				'address_country' => (string) ( $customer['address_country'] ?? '' ),
+				'vat_id'          => (string) ( $customer['vat_id'] ?? '' ),
 			],
 		];
 		$body     = (string) wp_json_encode( $payload );

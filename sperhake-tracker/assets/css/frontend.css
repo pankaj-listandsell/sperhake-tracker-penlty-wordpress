@@ -304,6 +304,7 @@ a.sperhake-btn--map:active { color: #fff !important; }
 	gap: 5px;
 }
 .sperhake-invoice__field--full { grid-column: 1 / -1; }
+.sperhake-invoice__hint { font-size: 0.78rem; color: #6b7280; }
 .sperhake-invoice__field-label {
 	font-size: 0.82rem;
 	font-weight: 600;

@@ -190,6 +190,12 @@ $row = static function ( string $label, string $value ): void {
 					<input type="text" id="sperhake-invoice-country" class="sperhake-invoice__input" autocomplete="country-name"
 						value="<?php echo esc_attr( $ic( 'address_country' ) ); ?>" />
 				</label>
+				<label class="sperhake-invoice__field sperhake-invoice__field--full">
+					<span class="sperhake-invoice__field-label"><?php esc_html_e( 'VAT ID (optional)', 'sperhake-tracker' ); ?></span>
+					<input type="text" id="sperhake-invoice-vat-id" class="sperhake-invoice__input" autocomplete="off"
+						maxlength="32" value="<?php echo esc_attr( $ic( 'vat_id' ) ); ?>" />
+					<span class="sperhake-invoice__hint"><?php esc_html_e( 'Only needed if you want your company VAT number on the invoice.', 'sperhake-tracker' ); ?></span>
+				</label>
 			</div>
 
 			<button

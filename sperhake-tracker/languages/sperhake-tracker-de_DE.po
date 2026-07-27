@@ -248,6 +248,9 @@ msgstr "Nicht festgelegt"
 msgid "One per line, e.g. X-Tenant: sperhake"
 msgstr "Eine pro Zeile, z. B. X-Tenant: sperhake"
 
+msgid "Only needed if you want your company VAT number on the invoice."
+msgstr "Nur nötig, wenn Ihre Umsatzsteuer-Nummer auf der Rechnung stehen soll."
+
 msgid "Outstanding Penalty"
 msgstr "Offene Gebühr"
 
@@ -520,6 +523,9 @@ msgstr "Transaktionsprotokolle"
 
 msgid "Unexpected response from the vehicle database."
 msgstr "Unerwartete Antwort von der Fahrzeugdatenbank."
+
+msgid "VAT ID (optional)"
+msgstr "USt-IdNr. (optional)"
 
 msgid "Vehicle Brand"
 msgstr "Fahrzeugmarke"

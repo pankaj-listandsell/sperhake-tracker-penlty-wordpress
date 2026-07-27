@@ -196,7 +196,8 @@
 					address_street: fieldVal( 'sperhake-invoice-street' ),
 					address_zip: fieldVal( 'sperhake-invoice-zip' ),
 					address_city: fieldVal( 'sperhake-invoice-city' ),
-					address_country: fieldVal( 'sperhake-invoice-country' )
+					address_country: fieldVal( 'sperhake-invoice-country' ),
+					vat_id: fieldVal( 'sperhake-invoice-vat-id' )
 				} ).then( function ( resp ) {
 					submitBtn.disabled = false;
 					submitBtn.textContent = original;

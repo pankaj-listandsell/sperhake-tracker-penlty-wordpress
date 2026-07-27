@@ -65,6 +65,8 @@ final class AjaxHandler {
 			'address_zip'     => isset( $_POST['address_zip'] ) ? sanitize_text_field( wp_unslash( $_POST['address_zip'] ) ) : '',
 			'address_city'    => isset( $_POST['address_city'] ) ? sanitize_text_field( wp_unslash( $_POST['address_city'] ) ) : '',
 			'address_country' => isset( $_POST['address_country'] ) ? sanitize_text_field( wp_unslash( $_POST['address_country'] ) ) : '',
+			// Optional: only businesses need their VAT number on the invoice.
+			'vat_id'          => isset( $_POST['vat_id'] ) ? sanitize_text_field( wp_unslash( $_POST['vat_id'] ) ) : '',
 		];
 
 		if ( '' === $customer['legal_name'] ) {

@@ -197,6 +197,7 @@ final class TransactionRepository {
 			'address_zip'     => '',
 			'address_city'    => '',
 			'address_country' => '',
+			'vat_id'          => '',
 		];
 
 		if ( ! $transaction ) {
@@ -212,6 +213,7 @@ final class TransactionRepository {
 		$details['address_zip']     = (string) ( $customer['address_zip'] ?? '' );
 		$details['address_city']    = (string) ( $customer['address_city'] ?? '' );
 		$details['address_country'] = (string) ( $customer['address_country'] ?? '' );
+		$details['vat_id']          = (string) ( $customer['vat_id'] ?? '' );
 
 		return $details;
 	}
